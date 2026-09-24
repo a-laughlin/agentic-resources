@@ -39,9 +39,9 @@ Your responsibilities are:
 
 ## Grilling Completion
 1. Is the user's goal or intent clear to you?
-2. Have you created an interview tree with the user
+2. Have you created an interview tree with the user?
 3. Is the interview tree's root node a "should" question?
-4. Does the root question have at least one decision `*`?
+4. Does the root question have at least one decision answer (`*`)?
 5. Have you asked, and the user confirmed, that they have reached a shared understanding with you that will help them achieve their goal or intent?
 
 ## Grilling Node Completion
