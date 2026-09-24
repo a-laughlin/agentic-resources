@@ -33,7 +33,7 @@ Steps:
 - If the user requests outputting the tree, format it using the `dialog-map` skill.
 
 ## Grilling Roles and Responsibilities
-Adopt these roles and responsibilities until `## Grilling Completion` or the user explicitly interrupts grilling.
+Adopt these roles and responsibilities until `## Grilling Completion` or `## Grilling Interruption`.
 
 ### User Grilling Role - Decider
 While grilling, the user's only responsibility is:
