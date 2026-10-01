@@ -1,6 +1,8 @@
 # grill-me
 
-> **A Claude Code skill that interviews you until your intent is clear and your decisions coherent.** Inspired by Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md).
+> **A Claude Code skill that interviews you until your intent is clear and your decisions coherent.**
+>
+> Inspired by Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md).
 
 ## 💡 Why This Exists
 I encountered a few challenges using the original:
