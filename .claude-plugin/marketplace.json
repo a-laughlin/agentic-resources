@@ -17,6 +17,17 @@
       "skills": [
         "./skills/clarify"
       ]
+    },
+    {
+      "name": "professional-communication",
+      "description": "Provides feedback to learn to write professional communication.",
+      "source": "./",
+      "homepage": "https://github.com/a-laughlin/agentic-resources/tree/main/skills/professional-communication",
+      "repository": "https://github.com/a-laughlin/agentic-resources",
+      "strict": false,
+      "skills": [
+        "./skills/professional-communication"
+      ]
     }
   ]
 }
