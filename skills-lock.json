@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "skills-visibility": {
+      "source": "evilmartians.com",
+      "sourceUrl": "https://evilmartians.com",
+      "sourceType": "well-known",
+      "computedHash": "bb13e29bd88c73987b5e2723ff5d7381f4557c10976ae16723bf170617d7f8f4",
+      "wellKnownDigest": "sha256:a84c34f42c71353eed94133accd2c39bad787d3603f7e9bf8ff56fb99cfc1241"
+    }
+  }
+}
