@@ -1,6 +1,6 @@
 ---
 name: luce
-description: Use on exact "luce"
+description: Elucidate your intent through incremental interrogation. Use on exact 'luce'.
 disable-model-invocation: true
 ---
 <elucidating>
