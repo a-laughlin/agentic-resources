@@ -3,9 +3,11 @@
 **Clarify your intent** through incremental interrogation.
 
 ## 💡 Why Clarify Exists
-While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous [cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory) along with other [challenges](#challenges). This skill reduces those effects and yields some extra [benefits](#benefits).
+While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous [cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory) along with other [challenges](#challenges). This skill approaches the challenges [differently](#️-differences-from-grill-me), and yields additional [benefits](#benefits) as a result.
 
-Key results are 2-4x faster decision exploration and quick capture for specs and decision records. For example, from `/clarify dinner` to the decision tree below took 3 minutes and 17 keystrokes (excluding `enter`).
+Key results are 2-4x faster decision exploration and quick capture for specs and decision records. For example, getting from `/clarify dinner` to the decision tree output below took 3 minutes and 17 keystrokes (excluding `enter`).
+
+## Example Output
 
 Notation: `?` question, `.` answer, `+` pro, `-` con, `*` decision.
 
@@ -38,12 +40,8 @@ What should I do about dinner?
         . time allows cooking at home or eating out
         . eating out costs more than cooking at home
 ```
-
+---
 <img src="./clarify-example.gif"/>
-
-
-Over time, the [differences from grill-me](#️-differences-from-grill-me) became significant enough to merit a new name, hence Clarify.
-
 
 ## Installation
 npx skills: `npx skills add https://www.a-laughlin.com/agentic-resources --skill clarify -a claude-code -g`\
@@ -53,7 +51,6 @@ gh: `gh skill install a-laughlin/agentic-resources clarify`\
 curl: `curl -fsSL --create-dirs https://www.a-laughlin.com/agentic-resources/agent-skills/clarify/SKILL.md -o ~/.claude/skills/clarify/SKILL.md`\
 --\
 Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.cursor/skills`, `~/.agents/skills`, …).
-
 
 ## Usage
 
