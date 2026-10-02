@@ -4,7 +4,7 @@ Agent skills by Adam Laughlin. Browse them below.
 
 | Skill | Description |
 | :--- | :--- |
-| [clarify](skills/clarify/README.md) | Elucidate your intent through incremental interrogation. |
+| [clarify](skills/clarify/README.md) | Clarify your intent through incremental interrogation. Use on exact 'clarify'. |
 
 ## Installation
 npx skills (pick from the catalog): `npx skills add https://www.a-laughlin.com/agentic-resources -a claude-code -g`\
