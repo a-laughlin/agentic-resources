@@ -48,7 +48,7 @@ Over time, the [differences from grill-me](#️-differences-from-grill-me) becam
 ## Installation
 npx skills: `npx skills add https://www.a-laughlin.com/agentic-resources --skill luce -a claude-code -g`\
 pnpm: `pnpm dlx skills add https://www.a-laughlin.com/agentic-resources --skill luce -a claude-code -g`\
-Claude plugin: `claude plugin marketplace add a-laughlin/agentic-resources && claude plugin install luce@agentic-resources`\
+Claude plugin: `claude plugin marketplace add a-laughlin/agentic-resources` then `claude plugin install luce@agentic-resources`\
 gh: `gh skill install a-laughlin/agentic-resources luce`\
 curl: `curl -fsSL --create-dirs https://www.a-laughlin.com/agentic-resources/agent-skills/luce/SKILL.md -o ~/.claude/skills/luce/SKILL.md`\
 --\
