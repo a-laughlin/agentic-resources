@@ -1,11 +1,13 @@
 # Luce
 
-**Elucidate your Intent** _through incremental interrogation._
+**Elucidate your Intent** through incremental interrogation.
+
 
 _Inspired by Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)._
 
+
 ## 💡 Why This Exists
-When using grill-me, I noticed extraneous (counterproductive) cognitive load along with some other [challenges](#challenges). I built this skill to reduce those effects and gain a few extra [benefits](#benefits). Key results are 2-4x faster decision tree exploration, pausing mid-session, and a shareable tree format for decision records and specs.
+When using grill-me, I noticed extraneous (counterproductive) cognitive load along with other [challenges](#challenges). I built this skill to reduce those effects and gain a few extra [benefits](#benefits). Key results are 2-4x faster decision tree exploration, pausing mid-session, and a shareable tree format for decision records and specs.
 
 For example, from `/luce dinner` to the decision tree below took 3 minutes and 17 keystrokes (excluding enter).
 
@@ -371,14 +373,13 @@ I encountered a few challenges using the original:
 - **Usability:** Answering by Q number takes lookups, scrolling, and typing. Good alternative suggestions show up inconsistently.
 
 ## Benefits
-In addition to solving the above challenges, this variant adds a few additional benefits (and personally amusing grilling metaphors):
-- **Fast heating:** Explore, generate, rescope, and decide options with hotkeys.
-- **Pause any time:** Defer questions and stop/restart when convenient.
-- **Perfectly cooked:** Stay laser-focused on key decisions with visible context paths.
-- **Serves groups:** Maintain shared context in meetings with [IBIS notation](https://en.wikipedia.org/wiki/Issue-based_information_system) \[1].
-- **Easy cleanup:** Store concise decision traces in specs, ADRs, and other decision records.
+In addition to solving the above challenges, Luce adds a few benefits:
+- Quickly explore, generate, rescope, and decide options with hotkeys.
+- Use in meetings to maintain shared context and focus \[1].
+- Defer questions and stop/restart grilling when convenient.
+- Store concise decision traces in specs, ADRs, and other decision records.
 
-1. IBIS was designed to maintain shared group understanding when solving wicked problems like "What should we do about climate change?". I've used it to keep meetings of 2-30 attendees on track and productive.
+1. [IBIS notation](https://en.wikipedia.org/wiki/Issue-based_information_system) was designed to maintain shared group understanding when solving wicked problems like "What should we do about climate change?". I've used it to keep meetings of 2-30 attendees on track and productive.
 
 ## Tradeoffs
 One benefit of free-form paragraphs is that they support intermingling decision traces with supporting data visualizations like images and tables. If you prefer mixing alternate data formats with your decision traces, semantic decision trees like IBIS will feel awkward. I prefer separating the decision traces from their supporting resources with a references section, so free-form paragraphs vs. decision trees don't matter.
