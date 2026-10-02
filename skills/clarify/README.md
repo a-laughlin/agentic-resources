@@ -7,13 +7,15 @@ While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpoc
 
 Key results are 2-4x faster decision exploration and quick capture for specs and decision records.
 
-For example, getting from `/clarify dinner` to the decision tree output below took 3 minutes and 17 keystrokes (excluding `enter`).
-
-## Example Output
+## Examples
 
 Notation: `?` question, `.` answer, `+` pro, `-` con, `*` decision.
 
 ```txt
+> /clarify dinner
+
+... 3 minutes and 17 keystrokes later:
+
 What should I do about dinner?
     * cook at home
         + no travel with kids
