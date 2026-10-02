@@ -3,7 +3,7 @@
 **Clarify your intent** through incremental interrogation.
 
 ## 💡 Why Clarify Exists
-While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous [cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory) along with other [challenges](#challenges). This skill approaches the challenges [differently](#️-differences-from-grill-me), and yields additional [benefits](#benefits) as a result.
+While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous [cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory) along with other [challenges](#challenges). This skill approaches the challenges [differently](#️-differences-from-grill-me), yielding additional [benefits](#benefits) as a result.
 
 Key results are 2-4x faster decision exploration and quick capture for specs and decision records. For example, getting from `/clarify dinner` to the decision tree output below took 3 minutes and 17 keystrokes (excluding `enter`).
 
