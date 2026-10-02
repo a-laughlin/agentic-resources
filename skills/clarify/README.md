@@ -382,15 +382,15 @@ One benefit of free-form paragraphs is that they support intermingling decision 
 
 | Feature | Original Project | This Project |
 | :--- | :--- | :--- |
-| **Directed Focus** | Many at once | One at a time |
+| **Directed Focus** | Many questions at once | One question at a time |
 | **Context Structure** | Unstructured design tree | Semantically structured issue tree |
 | **Context Presentation** | Unstructured paragraphs | logic paths + relevant context colocated when needed |
 | **Context Location** | Scattered across split paragraphs | Paired with question |
-| **Context Finding** | Asking, remembering Q#s + scrolling + reading, ctrl+f in session history | scanning latest response |
-| **Suggestions** | Inconsistent, unstructured, unrecorded | Consistent, structured, automatically suggested then confirmed and recorded |
-| **Assumptions** | thinking + manual typing, unrecorded | Consistent, structured, automatically suggested then confirmed and recorded |
-| **Responding** | "Q#" references + typing | Hotkeys |
-| **Usage Contexts** | Individual | Individual, Group, Decision Records |
+| **Context Finding** | Asking, remembering Q#s + scrolling + reading, ctrl+f in session history | scanning latest response, "tree" command |
+| **Suggestions** | Inconsistent, unstructured | Consistent, structured, automatically suggested then confirmed and recorded |
+| **Assumptions** | thinking + manual typing | Consistent, structured, automatically suggested then confirmed and recorded |
+| **Responding** | "Q#" references | Hotkeys |
+| **Usage Contexts** | Individual | Individual, Meetings, Decision Records, Specs |
 | **Logical Conflict Resolution** | - | automated detection, suggestion, and hotkeyed resolution |
 | **Pausing** | — | Defer questions, stop and resume |
 
