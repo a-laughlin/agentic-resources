@@ -1,6 +1,8 @@
 ---
 name: professional-communication
 description: Provides feedback to learn to write professional communication.
+metadata:
+  docs: https://github.com/a-laughlin/agentic-resources/tree/main/skills/professional-communication
 ---
 
 # Instructions
