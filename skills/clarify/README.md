@@ -1,4 +1,4 @@
-# Luce
+# Clarify
 
 **Elucidate your Intent** through incremental interrogation.
 
@@ -9,7 +9,7 @@ _Inspired by Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills
 ## 💡 Why This Exists
 When using grill-me, I noticed extraneous (counterproductive) cognitive load along with other [challenges](#challenges). I built this skill to reduce those effects and gain a few extra [benefits](#benefits). Key results are 2-4x faster decision tree exploration, pausing mid-session, and a shareable tree format for decision records and specs.
 
-For example, from `/luce dinner` to the decision tree below took 3 minutes and 17 keystrokes (excluding enter).
+For example, from `/clarify dinner` to the decision tree below took 3 minutes and 17 keystrokes (excluding enter).
 
 Notation: `?` question, `.` answer, `+` pro, `-` con, `*` decision.
 
@@ -44,22 +44,22 @@ What should I do about dinner?
 ```
 _Similar trees produced with Claude Sonnet 5.5 and Opus 5.5 in similar times. The full Sonnet 5.5 session log is available under [Usage Example](#usage-example)._
 
-Over time, the [differences from grill-me](#️-differences-from-grill-me) became significant enough to merit a new name, hence Luce.
+Over time, the [differences from grill-me](#️-differences-from-grill-me) became significant enough to merit a new name, hence Clarify.
 
 
 ## Installation
-npx skills: `npx skills add https://www.a-laughlin.com/agentic-resources --skill luce -a claude-code -g`\
-pnpm: `pnpm dlx skills add https://www.a-laughlin.com/agentic-resources --skill luce -a claude-code -g`\
-Claude plugin: `claude plugin marketplace add a-laughlin/agentic-resources` then `claude plugin install luce@agentic-resources`\
-gh: `gh skill install a-laughlin/agentic-resources luce`\
-curl: `curl -fsSL --create-dirs https://www.a-laughlin.com/agentic-resources/agent-skills/luce/SKILL.md -o ~/.claude/skills/luce/SKILL.md`\
+npx skills: `npx skills add https://www.a-laughlin.com/agentic-resources --skill clarify -a claude-code -g`\
+pnpm: `pnpm dlx skills add https://www.a-laughlin.com/agentic-resources --skill clarify -a claude-code -g`\
+Claude plugin: `claude plugin marketplace add a-laughlin/agentic-resources` then `claude plugin install clarify@agentic-resources`\
+gh: `gh skill install a-laughlin/agentic-resources clarify`\
+curl: `curl -fsSL --create-dirs https://www.a-laughlin.com/agentic-resources/agent-skills/clarify/SKILL.md -o ~/.claude/skills/clarify/SKILL.md`\
 --\
 Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.cursor/skills`, `~/.agents/skills`, …).
 
 
 ## Usage
 
-In your favorite AI chat, `/luce <problems, solutions, questions, ideas, anything...>`
+In your favorite AI chat, `/clarify <problems, solutions, questions, ideas, anything...>`
 
 ## Usage Example
 
@@ -373,7 +373,7 @@ I encountered a few challenges using the original:
 - **Usability:** Answering by Q number takes lookups, scrolling, and typing. Good alternative suggestions show up inconsistently.
 
 ## Benefits
-In addition to solving the above challenges, Luce adds a few benefits:
+In addition to solving the above challenges, Clarify adds a few benefits:
 - Quickly explore, generate, rescope, and decide options with hotkeys.
 - Use in meetings to maintain shared context and focus \[1].
 - Defer questions and stop/restart grilling when convenient.

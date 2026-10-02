@@ -8,14 +8,14 @@
   },
   "plugins": [
     {
-      "name": "luce",
+      "name": "clarify",
       "description": "Elucidate your intent through incremental interrogation.",
       "source": "./",
-      "homepage": "https://github.com/a-laughlin/agentic-resources/tree/main/skills/luce",
+      "homepage": "https://github.com/a-laughlin/agentic-resources/tree/main/skills/clarify",
       "repository": "https://github.com/a-laughlin/agentic-resources",
       "strict": false,
       "skills": [
-        "./skills/luce"
+        "./skills/clarify"
       ]
     }
   ]
