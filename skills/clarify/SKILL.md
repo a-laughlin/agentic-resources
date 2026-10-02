@@ -183,7 +183,7 @@ What should we eat?
 
 ## Clarify Response Formats
 ### Clarify Path Format
-Show ONLY the path, the path's closest level of answers, the current_node's immediate children, and footer. Hide non-path questions. Sort nodes by `*|.|+|-|assumed|?`.
+Show ONLY the path, the path's closest level of answers, the current_node's immediate children, and footer. Hide non-path questions. Sort nodes by `*|.|+|-|prior_assumptions|?`.
 ```txt
 $path
     {{foreach $suggestions: `$n $symbol $suggestion\n`}}
@@ -192,7 +192,7 @@ $footer
 ```
 
 ### Clarify Decision Format
-Show ONLY the path to current node, the children to decide, and info relevant to that decision. Sort nodes by `*|.|+|-|assumed|?`.
+Show ONLY the path to current node, the children to decide, and info relevant to that decision. Sort nodes by `*|.|+|-|prior_assumptions|?`.
 ```txt
 Decide: $path
     {{foreach $decision: `$n $symbol $suggestion\n`}}

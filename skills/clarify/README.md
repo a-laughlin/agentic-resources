@@ -3,7 +3,7 @@
 **Clarify your intent** through incremental interrogation.
 
 ## 💡 Why Clarify Exists
-While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous (counterproductive) cognitive load along with other [challenges](#challenges). This skill reduces those effects and yields some extra [benefits](#benefits).
+While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous [cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory) along with other [challenges](#challenges). This skill reduces those effects and yields some extra [benefits](#benefits).
 
 Key results are 2-4x faster decision exploration and quick capture for specs and decision records. For example, from `/clarify dinner` to the decision tree below took 3 minutes and 17 keystrokes excluding `enter`.
 
@@ -38,7 +38,9 @@ What should I do about dinner?
         . time allows cooking at home or eating out
         . eating out costs more than cooking at home
 ```
-_Similar trees produced with Claude Sonnet 5.5 and Opus 5.5 in similar times. The full Sonnet 5.5 session log is available under [Usage Example](#usage-example)._
+
+<img src="./clarify-example.gif"/>
+
 
 Over time, the [differences from grill-me](#️-differences-from-grill-me) became significant enough to merit a new name, hence Clarify.
 
@@ -56,304 +58,6 @@ Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.curso
 ## Usage
 
 In your favorite AI chat, `/clarify <problems, solutions, questions, ideas, anything...>`
-
-## Usage Example
-
-Notation: `?` question, `.` answer, `+` pro, `-` con, `*` decision.
-
-```txt
-❯ /grill-me about dinner
-
-⏺ Skill(grill-me)
-Successfully loaded skill
-
-What should I do about dinner?
-  1 . cook at home
-  2 . order delivery
-  3 . eat out
-  4 . eat leftovers
-  5 . get takeout
-  6 . skip dinner
-  7 ? How much time do you have before dinner?
-  8 ? How does cost differ across cooking, delivery, eating out, takeout?
-  9 ? Who are you eating with?
-
----
-
-Type ".": keep all, "123 11": keep "1,2,3,11"pecific, "++|m": more, "defer", "tree", or____.
-
-✻ Cogitated for 6s · done 10:08 PM
-
-❯ 139
-
-What should I do about dinner?
-  . cook at home
-  . eat out
-  Assumptions?
-    1 . time allows cooking at home or eating out
-    2 . eating out costs more than cooking at
-
----
-
-You skipped two questions, so I turned them into assumptions.
-
-Type ".": keep all, "123 11": keep "1,2,3,11"pecific, "++|m": more, "defer", "tree", or____.
-
-✻ Crunched for 4s · done 10:08 PM
-
-❯ .
-
-What should I do about dinner?
-  . cook at home
-  . eat out
-  Who are you eating with?
-    1 . alone
-    2 . partner
-    3 . family with kids
-    4 . friends
-    5 . guests you're hosting
-  assumed: time allows cooking at home or eat
-  assumed: eating out costs more than cooking at home
-
----
-
-Type ".": keep all, "123 11": keep "1,2,3,11", "-|g": general, "+|s": specific, "++|m": more, "defer", "tree", or
-____.
-
-✻ Brewed for 3s · done 10:08 PM
-
-❯ 3
-
-What should I do about dinner?
-  . cook at home
-  . eat out
-  Who are you eating with?
-    . family with kids
-      1 ? How old are the kids?
-      2 ? How many people are eating?
-      3 ? What dietary restrictions does the family have?
-      4 ? What foods will the kids eat?
-  assumed: time allows cooking at home or eating out
-  assumed: eating out costs more than cooking
-
----
-
-Type ".": keep all, "0":keep none, "123 11": neral, "+|s": specific, "++|m": more, "defer", "tree", or ____.
-
-✻ Cooked for 4s · done 10:09 PM
-
-❯ 2
-
-What should I do about dinner?
-  . cook at home
-  . eat out
-  Who are you eating with?
-    . family with kids
-      How many people are eating?
-      Assumptions?
-        1 . kids are old enough to sit throug
-        2 . family has no dietary restrictions
-        3 . kids will eat ordinary family mea
-  assumed: time allows cooking at home or eating out
-  assumed: eating out costs more than cooking
-
----
-
-You skipped three questions, so I turned them into assumptions.
-
-Type ".": keep all, "0":keep none, "123 11": neral, "+|s": specific, "++|m": more, "defer", "tree", or ____.
-
-✻ Baked for 3s · done 10:09 PM
-
-❯ .
-
-What should I do about dinner?
-  . cook at home
-  . eat out
-  Who are you eating with?
-    . family with kids
-      How many people are eating?
-        1 . 3
-        2 . 4
-        3 . 5
-        4 . 6 or more
-      assumed: kids are old enough to sit through a restaurant meal
-      assumed: family has no dietary restrict
-      assumed: kids will eat ordinary family meals
-  assumed: time allows cooking at home or eat
-  assumed: eating out costs more than cooking at home
-
----
-
-Type ".": keep all, "123 11": keep "1,2,3,11", "-|g": general, "+|s": specific, "++|m": more, "defer", "tree", or
-____.
-
-✻ Cooked for 3s · done 10:09 PM
-
-❯ 2
-
-What should I do about dinner?
-  . cook at home
-    1 + control over ingredients
-    2 + leftovers for later meals
-    3 + no travel with kids
-    4 - prep time
-    5 - cleanup
-    6 ? What ingredients do you have on hand?
-    7 ? Who would cook?
-  . eat out
-  Who are you eating with?
-    . family with kids
-      How many people are eating?
-        . 4
-  assumed: time allows cooking at home or eat
-  assumed: eating out costs more than cooking at home
-
----
-
-Type ".": keep all, "0":keep none, "123 11": keep "1,2,3,11", "-|g": general, "+|s": specific, "++|m": more, "defer",
-"tree", or ____.
-
-✻ Brewed for 6s · done 10:09 PM
-
-❯ 345
-
-What should I do about dinner?
-  . cook at home
-    + no travel with kids
-    - cleanup
-    Assumptions?
-      1 . you have ingredients for a meal on hand
-      2 . you would cook
-      3 . control over ingredients won't change decision
-      4 . leftovers for later meals won't change decision
-      5 . prep time won't change decision
-  . eat out
-  assumed: time allows cooking at home or eating out
-  assumed: eating out costs more than cooking
-
----
-
-You skipped two questions, two pros, and one con, so I turned them into assumptions.
-
-Type ".": keep all, "0":keep none, "123 11": neral, "+|s": specific, "++|m": more, "defer", "tree", or ____.
-
-✻ Sautéed for 3s · done 10:10 PM
-
-❯ .
-
-What should I do about dinner?
-  . cook at home
-    + no travel with kids
-    - cleanup
-  . eat out
-    1 + no prep
-    2 + no cleanup
-    3 + a treat for the kids
-    4 - travel with kids
-    5 - wait for a table
-    6 - less control over ingredients
-    7 ? Which restaurant?
-  assumed: time allows cooking at home or eating out
-  assumed: eating out costs more than cooking
-
----
-
-Type ".": keep all, "0":keep none, "123 11": neral, "+|s": specific, "++|m": more, "defer", "tree", or ____.
-
-✻ Churned for 5s · done 10:10 PM
-
-❯ 24
-
-What should I do about dinner?
-  . cook at home
-    + no travel with kids
-    - cleanup
-  . eat out
-    + no cleanup
-    - travel with kids
-    Assumptions?
-      1 . you have a kid-friendly restaurant in mind
-      2 . no prep won't change decision
-      3 . a treat for the kids won't change decision
-      4 . wait for a table won't change decision
-      5 . less control over ingredients won't change decision
-  assumed: time allows cooking at home or eat
-  assumed: eating out costs more than cooking at home
-
----
-
-You skipped one question, two pros, and two cons, so I turned them into assumptions.
-
-Type ".": keep all, "0":keep none, "123 11": keep "1,2,3,11", "-|g": general, "+|s": specific, "++|m": more, "defer",
-"tree", or ____.
-
-✻ Cogitated for 3s · done 10:10 PM
-
-❯ 12
-
-Decide: What should I do about dinner?
-  1 . cook at home
-    + no travel with kids
-    - cleanup
-    assumed: you have ingredients for a meal
-    assumed: you would cook
-  2 . eat out
-    + no cleanup
-    - travel with kids
-    assumed: you have a kid-friendly restaurant in mind
-    assumed: no prep won't change decision
-  assumed: eating out costs more than cooking at home
-  assumed: time allows cooking at home or eat
-
----
-
-Type "123 11": decide "1,2,3,11", "defer", "t
-
-✻ Sautéed for 3s · done 10:11 PM
-
-❯ 1
-
-What should I do about dinner?
-  * cook at home
-    + no travel with kids
-    - cleanup
-    Assumptions?
-      . you have ingredients for a meal on hand
-      . you would cook
-      . control over ingredients won't change decision
-      . leftovers for later meals won't chang
-      . prep time won't change decision
-  . eat out
-    + no cleanup
-    - travel with kids
-    Assumptions?
-      . you have a kid-friendly restaurant in
-      . no prep won't change decision
-  Who are you eating with?
-    . family with kids
-      How many people are eating?
-        . 4
-      Assumptions?
-        . kids are old enough to sit through a restaurant meal
-        . family has no dietary restrictions
-        . kids will eat ordinary family meals
-  Assumptions?
-    . time allows cooking at home or eating out
-    . eating out costs more than cooking at home
-
----
-
-Tree Complete. You decided to cook at home for a family of 4. Does this tree help you settle dinner? Yes=., No=0.
-
-✻ Churned for 4s · done 10:11 PM
-
-❯ .
-
-Persist the current tree? Yes=., No=0.
-
-✻ Crunched for 1s · done 10:11 PM
-```
 
 ## Challenges
 I encountered a few challenges using the original:
@@ -380,12 +84,12 @@ One benefit of free-form paragraphs is that they support intermingling decision 
 
 ## ⚖️ Differences from Grill-me
 
-| Feature | Original Project | This Project |
+| Aspect | Grill-Me | Clarify |
 | :--- | :--- | :--- |
-| **Directed Focus** | Many questions at once | One question at a time |
+| **Focus** | Many questions at once | One question at a time |
 | **Context Structure** | Unstructured design tree | Semantically structured issue tree |
-| **Context Presentation** | Unstructured paragraphs | logic paths + relevant context colocated when needed |
-| **Context Location** | Scattered across split paragraphs | Paired with question |
+| **Context Presentation** | Unstructured paragraphs | logic paths |
+| **Context Location** | Spread within and across split paragraphs | Relevant context colocated with latest question |
 | **Context Finding** | Asking, remembering Q#s + scrolling + reading, ctrl+f in session history | scanning latest response, "tree" command |
 | **Suggestions** | Inconsistent, unstructured | Consistent, structured, automatically suggested then confirmed and recorded |
 | **Assumptions** | thinking + manual typing | Consistent, structured, automatically suggested then confirmed and recorded |
