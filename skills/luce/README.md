@@ -46,10 +46,13 @@ Over time, the [differences from grill-me](#️-differences-from-grill-me) becam
 
 
 ## Installation
-npm: `npx skills add https://evilmartians.com --skill skills-visibility -a claude-code -g`
-pnpm: `pnpm dlx skills add https://evilmartians.com --skill skills-visibility -a claude-code -g`
-skills: `skills add https://evilmartians.com --skill skills-visibility -a claude-code -g`
-gh: `gh skill install a-laughlin/agentic-resources/skills skills-visibility`
+npx skills: `npx skills add https://www.a-laughlin.com/agentic-resources --skill luce -a claude-code -g`\
+pnpm: `pnpm dlx skills add https://www.a-laughlin.com/agentic-resources --skill luce -a claude-code -g`\
+Claude plugin: `claude plugin marketplace add a-laughlin/agentic-resources && claude plugin install luce@agentic-resources`\
+gh: `gh skill install a-laughlin/agentic-resources luce`\
+curl: `curl -fsSL --create-dirs https://www.a-laughlin.com/agentic-resources/agent-skills/luce/SKILL.md -o ~/.claude/skills/luce/SKILL.md`\
+--\
+Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.cursor/skills`, `~/.agents/skills`, …).
 
 
 ## Usage
@@ -359,21 +362,21 @@ Persist the current tree? Yes=., No=0.
 
 ## Challenges
 I encountered a few challenges using the original:
-* **Scannability:** Paragraphs of free-form text and inline suggestions are slow to scan vs lists.
-* **Consistency:** The default skill sometimes outputs lists to choose from, sometimes not. The inconsistent formatting creats unpredictability that slows down entry and comprehension speed.
-* **Traceability:** Untyped options and assumptions go unrecorded, leaving no trace for decision records and specs.
-* **Shareability:** The linear Q# format and spacing are too verbose and indirect for practical usage in decision records and specs.
-* **Understandability:** Questions paragraphs mix options, pros, cons, and sub-questions inconsistently, slowing reasoning about the tree. The linear+batch format obscures tree relationships. Question batches overflow the visible window and require scrolling. "Q#" indexes + batching require remembering numbers and mixing them with typed concepts. The default skill inconsistently outputs lists, sometimes not. All of these slow comprehension through [extraneous cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory).
-* **Anchoring bias:** A single recommendation anchors on that option, and missing null options anchor on "fixing what ain't broke".
-* **Usability:** Answering by Q number takes lookups, scrolling, and typing. Good alternative suggestions show up inconsistently.
+- **Scannability:** Paragraphs of free-form text and inline suggestions are slow to scan vs lists.
+- **Consistency:** The default skill sometimes outputs lists to choose from, sometimes not. The inconsistent formatting creats unpredictability that slows down entry and comprehension speed.
+- **Traceability:** Untyped options and assumptions go unrecorded, leaving no trace for decision records and specs.
+- **Shareability:** The linear Q# format and spacing are too verbose and indirect for practical usage in decision records and specs.
+- **Understandability:** Questions paragraphs mix options, pros, cons, and sub-questions inconsistently, slowing reasoning about the tree. The linear+batch format obscures tree relationships. Question batches overflow the visible window and require scrolling. "Q#" indexes + batching require remembering numbers and mixing them with typed concepts. The default skill inconsistently outputs lists, sometimes not. All of these slow comprehension through [extraneous cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory).
+- **Anchoring bias:** A single recommendation anchors on that option, and missing null options anchor on "fixing what ain't broke".
+- **Usability:** Answering by Q number takes lookups, scrolling, and typing. Good alternative suggestions show up inconsistently.
 
 ## Benefits
 In addition to solving the above challenges, this variant adds a few additional benefits (and personally amusing grilling metaphors):
-* **Fast heating:** Explore, generate, rescope, and decide options with hotkeys.
-* **Pause any time:** Defer questions and stop/restart when convenient.
-* **Perfectly cooked:** Stay laser-focused on key decisions with visible context paths.
-* **Serves groups:** Maintain shared context in meetings with [IBIS notation](https://en.wikipedia.org/wiki/Issue-based_information_system) \[1].
-* **Easy cleanup:** Store concise decision traces in specs, ADRs, and other decision records.
+- **Fast heating:** Explore, generate, rescope, and decide options with hotkeys.
+- **Pause any time:** Defer questions and stop/restart when convenient.
+- **Perfectly cooked:** Stay laser-focused on key decisions with visible context paths.
+- **Serves groups:** Maintain shared context in meetings with [IBIS notation](https://en.wikipedia.org/wiki/Issue-based_information_system) \[1].
+- **Easy cleanup:** Store concise decision traces in specs, ADRs, and other decision records.
 
 1. IBIS was designed to maintain shared group understanding when solving wicked problems like "What should we do about climate change?". I've used it to keep meetings of 2-30 attendees on track and productive.
 
@@ -398,7 +401,7 @@ One benefit of free-form paragraphs is that they support intermingling decision 
 | **Pausing** | — | Defer questions, stop and resume |
 
 ## 📜 Credits
-* Inspired by [@mattpocock](https://github.com/mattpocock)'s [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md).
+- Inspired by [@mattpocock](https://github.com/mattpocock)'s [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md).
 
 ## 📄 License
 MIT © Adam Laughlin

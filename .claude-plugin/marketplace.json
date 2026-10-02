@@ -1,0 +1,20 @@
+{
+  "name": "agentic-resources",
+  "owner": {
+    "name": "Adam Laughlin"
+  },
+  "metadata": {
+    "description": "Agent skills by Adam Laughlin."
+  },
+  "plugins": [
+    {
+      "name": "luce",
+      "description": "Elucidate your intent through incremental interrogation.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/luce"
+      ]
+    }
+  ]
+}
