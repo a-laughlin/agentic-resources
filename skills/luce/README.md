@@ -7,7 +7,7 @@ _Inspired by Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills
 ## 💡 Why This Exists
 When using grill-me, I noticed extraneous (counterproductive) cognitive load along with some other [challenges](#challenges). I built this skill to reduce those effects and gain a few extra [benefits](#benefits). Key results are 2-4x faster decision tree exploration, pausing mid-session, and a shareable tree format for decision records and specs.
 
-For example, from `/grill-me about dinner` to the decision tree below took 3 minutes and 17 keystrokes (excluding enter).
+For example, from `/luce dinner` to the decision tree below took 3 minutes and 17 keystrokes (excluding enter).
 
 Notation: `?` question, `.` answer, `+` pro, `-` con, `*` decision.
 
@@ -40,7 +40,7 @@ What should I do about dinner?
         . time allows cooking at home or eating out
         . eating out costs more than cooking at home
 ```
-_Produced with Claude Sonnet 5.5 and Opus 5.5. The full session log is available under [Usage Example](#usage-example)._
+_Similar trees produced with Claude Sonnet 5.5 and Opus 5.5 in similar times. The full Sonnet 5.5 session log is available under [Usage Example](#usage-example)._
 
 Over time, the [differences from grill-me](#️-differences-from-grill-me) became significant enough to merit a new name, hence Luce.
 
@@ -57,7 +57,7 @@ Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.curso
 
 ## Usage
 
-In your favorite AI chat, `luce <problems, solutions, questions, ideas, anything...>`
+In your favorite AI chat, `/luce <problems, solutions, questions, ideas, anything...>`
 
 ## Usage Example
 
