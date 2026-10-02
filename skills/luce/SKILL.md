@@ -2,6 +2,8 @@
 name: luce
 description: Elucidate your intent through incremental interrogation. Use on exact 'luce'.
 disable-model-invocation: true
+metadata:
+  docs: https://www.a-laughlin.com/agentic-resources/agent-skills/luce/
 ---
 <elucidating>
 

@@ -26,6 +26,7 @@ jobs:
         uses: actions/configure-pages@v5
       # Pages reports an http:// base_url when HTTPS isn't enforced; always publish https URLs.
       - run: |
+          pip install markdown
           base="${{ steps.pages.outputs.base_url }}"
           python3 scripts/build_site.py "${base/#http:/https:}" _site
       - uses: actions/upload-pages-artifact@v3
