@@ -5,7 +5,7 @@
 ## 💡 Why Clarify Exists
 While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous [cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory) along with other [challenges](#challenges). This skill reduces those effects and yields some extra [benefits](#benefits).
 
-Key results are 2-4x faster decision exploration and quick capture for specs and decision records. For example, from `/clarify dinner` to the decision tree below took 3 minutes and 17 keystrokes excluding `enter`.
+Key results are 2-4x faster decision exploration and quick capture for specs and decision records. For example, from `/clarify dinner` to the decision tree below took 3 minutes and 17 keystrokes (excluding `enter`).
 
 Notation: `?` question, `.` answer, `+` pro, `-` con, `*` decision.
 
