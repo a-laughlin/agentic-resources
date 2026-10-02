@@ -2,10 +2,10 @@
 
 **Clarify your intent** through incremental interrogation.
 
-## 💡 Why This Exists
-When using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I noticed extraneous (counterproductive) cognitive load along with other [challenges](#challenges). I built this skill to reduce those effects and gain a few extra [benefits](#benefits). Key results are 2-4x faster decision tree exploration, mid-session pausing, and a shareable tree format for decision records and specs.
+## 💡 Why Clarify Exists
+While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous (counterproductive) cognitive load along with other [challenges](#challenges). This skill reduces those effects and yields some extra [benefits](#benefits).
 
-For example, from `/clarify dinner` to the decision tree below took 3 minutes, 0 words, and 17 keystrokes (excluding enter).
+Key results are 2-4x faster decision exploration and quick capture for specs and decision records. For example, from `/clarify dinner` to the decision tree below took 3 minutes and 17 keystrokes excluding `enter`.
 
 Notation: `?` question, `.` answer, `+` pro, `-` con, `*` decision.
 
