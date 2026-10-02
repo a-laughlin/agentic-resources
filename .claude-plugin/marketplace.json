@@ -11,7 +11,7 @@
       "name": "luce",
       "description": "Elucidate your intent through incremental interrogation.",
       "source": "./",
-      "homepage": "https://www.a-laughlin.com/agentic-resources/agent-skills/luce/",
+      "homepage": "https://github.com/a-laughlin/agentic-resources/tree/main/skills/luce",
       "repository": "https://github.com/a-laughlin/agentic-resources",
       "strict": false,
       "skills": [

@@ -1,6 +1,6 @@
 # Agentic Resources
 
-Agent skills by Adam Laughlin. Browse them at [a-laughlin.com/agentic-resources](https://www.a-laughlin.com/agentic-resources/).
+Agent skills by Adam Laughlin. Browse them below.
 
 | Skill | Description |
 | :--- | :--- |
