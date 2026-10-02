@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "clarify",
-      "description": "Elucidate your intent through incremental interrogation.",
+      "description": "Clarify your intent through incremental interrogation. Use on exact 'clarify'.",
       "source": "./",
       "homepage": "https://github.com/a-laughlin/agentic-resources/tree/main/skills/clarify",
       "repository": "https://github.com/a-laughlin/agentic-resources",
