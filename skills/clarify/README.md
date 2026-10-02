@@ -58,6 +58,10 @@ Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.curso
 
 In your favorite AI chat, `/clarify <problems, solutions, questions, ideas, anything...>`
 
+## TBD
+
+This is a very early version so much is in progress. It just hit the point where tweaks started making its behavior less consistent across models and sessions, so evals are the next step before further tweaks.
+
 ## Challenges
 I encountered a few challenges using the original:
 - **Scannability:** Paragraphs of free-form text and inline suggestions are slow to scan vs lists.
