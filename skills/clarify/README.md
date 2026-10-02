@@ -61,9 +61,6 @@ In your favorite AI chat, `/clarify <problems, solutions, questions, ideas, anyt
 
 Notation: `?` question, `.` answer, `+` pro, `-` con, `*` decision.
 
-Here's one grilling session with Opus 5.5. Completed in 3 minutes, 17 characters, and without leaving the number pad.
-This example required 3 minutes and 17 characters typed, without ever leaving the number pad.
-
 ```txt
 ❯ /grill-me about dinner
 
