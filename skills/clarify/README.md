@@ -1,11 +1,11 @@
 # Clarify
 
-**Clarify your intent** through incremental interrogation.
+**Decisions: Good. Fast. Shared.**
 
 ## 💡 Why Clarify Exists
 While using Matt Pocock's delightful [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous cognitive load and other [challenges](#challenges). The Clarify skill approaches the challenges [differently](#️-differences-from-grill-me), yielding additional [benefits](#benefits) as a result.
 
-Key results are 2-4x faster decision exploration and quick capture for specs and decision records.
+The result is 2-4x faster decision speed at similar thoroughness, in a format that's quick for you to share and for colleagues to scan.
 
 ## Examples
 
