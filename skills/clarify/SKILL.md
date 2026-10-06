@@ -88,9 +88,13 @@ note: Steps operate like a recursive function. "pass" means continue to the next
                       5. return.
                       - When all of current_node's subagents finish: run`Node Steps(current_node)` (async behavior expected). Return.
 6. Wait for user response. If response:
-    - is `++|m`: append more suggestions and continue waiting.
-    - is `-|s`: append more general suggestions and continue waiting.
-    - is `+|g`: append more specific suggestions and continue waiting.
+    - matches any of the following keys exactly, then append them to existing suggestions (preserve numbers), then continue waiting:
+        - is `=`: similar options.
+        - is `+`: more specific options.
+        - is `-`: more general options.
+        - is `=?`: similar questions.
+        - is `+?`: more specific questions.
+        - is `-?`: more general questions.
     - added any children that distract from solving the root problem: add a $message gently reflecting the distraction back to the user and asking if they want to omit it.
     - skipped any suggestions (pros/cons or prequisite questions) and current_node is not "Assumptions?":
         1. if the path's closest `.|?` lacks an "Assumptions?" child, add one.
@@ -183,7 +187,7 @@ What should we eat?
 
 ## Clarify Response Formats
 ### Clarify Path Format
-Show ONLY the path, the path's closest level of answers, the current_node's immediate children, and footer. Hide non-path questions. Sort nodes by `*|.|+|-|prior_assumptions|?`.
+Show ONLY path, path's closest level of answers, those answers' selected pros/cons (in a single line), the current_node's immediate children (on separate lines), and footer. Hide non-path questions. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
 ```txt
 $path
     {{foreach $suggestions: `$n $symbol $suggestion\n`}}
@@ -192,7 +196,7 @@ $footer
 ```
 
 ### Clarify Decision Format
-Show ONLY the path to current node, the children to decide, and info relevant to that decision. Sort nodes by `*|.|+|-|prior_assumptions|?`.
+Show ONLY the path to current node, the children to decide, and info relevant to that decision. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
 ```txt
 Decide: $path
     {{foreach $decision: `$n $symbol $suggestion\n`}}
@@ -202,7 +206,7 @@ $footer
 ```
 
 ### Clarify Tree Format
-Show the full and current interview tree. If suggestions/decision_choices exist, preserve their numbers. Sort nodes by `*|.|+|-|prior_assumptions|?`.
+Show the full and current interview tree. If suggestions/decision_choices exist, preserve their numbers. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
 ```txt
 $tree
 $footer
@@ -223,9 +227,9 @@ $footer
 ---
 
 {{if $message:$message\n\n}}
-{{if format is conflict:`Type "123 11": choose solutions "1,2,3 11", "-|g": general, "+|s": specific, "++|m": more, , or ____. Conflict resolutions are not added to tree.`}}
+{{if format is conflict:`Type "123 11": choose solutions "1,2,3 11", "-|-?": general, "+|+?": specific, "=|=?": more, or ____. Conflict resolutions are not added to tree.`}}
 {{elif format is decision:`Type "123 11": decide "1,2,3,11", "defer", "tree", or ____.`}}
-{{elif current_node is `?`:Type ".": keep all, "123 11": keep "1,2,3,11", "-|g": general, "+|s": specific, "++|m": more, "defer", "tree", or ____.}}
-{{else: `Type ".": keep all, "0":keep none, "123 11": keep "1,2,3,11", "-|g": general, "+|s": specific, "++|m": more, "defer", "tree", or ____.`}}
+{{elif current_node is `?`:Type ".": keep all, "123 11": keep "1,2,3,11", "-|-?": general, "+|+?": specific, "=|=?": more, "defer", "tree", or ____.}}
+{{else: `Type ".": keep all, "0":keep none, "123 11": keep "1,2,3,11", "-|-?": general, "+|+?": specific, "=|=?": more, "defer", "tree", or ____.`}}
 ```
 </elucidating>
