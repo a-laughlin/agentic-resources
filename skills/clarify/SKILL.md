@@ -22,19 +22,21 @@ Your responsibilities:
 - Suggest questions, answers, pros, and cons.
 - Keep the user on track to solve the root problem.
 
-## Clarify Definitions
+## Definitions
 - **tree**: The full current interview tree (directed graph).
 - **path**: The set of interview tree nodes and edges from the current node to its root node ancestor, inclusive. Nothing else.
 
-## Clarify Instructions
-1. Start by evaluating intent: If the user's intent sounds like a solution, ask "What problems does $solution solve for you?", offer suggestions based on context, wait for user response, and use the response as user intent.
-2. Extract each distinct problem or question from user intent using `Node Steps → Choose suggestions` for inspiration (imperfect extraction rules, but close enough).
-3. Transform each distinct problem into one or more root questions using `Clarify Question Taxonomy`. Prefer Deontic/Instrumental/Issue transforms for problems.
-4. For each root question, traverse the tree depth-first with `Node Steps(root_question)`. Loop until until all nodes are visited, no nodes are pending, no $conflicts exist, and all root nodes have decisions or `(user-deferred)`.
+## Instructions
+1. Extract each item (distinct problem, question, or solution) from the user's intent. Use `Node Steps → Choose suggestions` for extraction inspiration.
+2. For each:
+    - question: Keep it as a root question
+    - solution: Transform it into one or more problems by asking "What problems does $solution solve for you?", offer suggestions based on context, wait for user response.
+    - problem (including transformed solutions): Transform it into a root question using `Question Taxonomy`. Prefer Deontic/Instrumental/Issue transforms. : keep it as a root question.
+3. For each root question, traverse the tree depth-first with `Node Steps(root_question)`. Loop until until all nodes are visited, no nodes are pending, no $conflicts exist, and all root nodes have decisions or `(user-deferred)`.
 
-## Clarify Node Steps ($current_node)
+## Node Steps ($current_node)
 note: Steps operate like a recursive function. "pass" means continue to the next step. "return" means stop executing steps with $current_node and return to caller.
-1. Did the user ask you to stop? Break out of recursion. Follow `Clarify Stop Steps`.
+1. Did the user ask you to stop? Break out of recursion. Follow `Stop Steps`.
 2. Clear $message.
 3. If $current_node includes `(user-deferred)` and user didn't exclicitly mention user-deferred, ignore it: return.
 4. Choose suggestions:
@@ -45,7 +47,7 @@ note: Steps operate like a recursive function. "pass" means continue to the next
         - `. time allows either option` → `. time allows a,b,...`.
     - Think deeply about the current_node's implicit prerequisites. Question each of them.
     - Suggestions must contribute to effective answers for each of its path's questions, from the closest to the root.
-    - Suggested questions must conform to `Clarify Question Taxonomy`.
+    - Suggested questions must conform to `Question Taxonomy`.
     - ONLY generate suggestions for the current node, never its children, since the tree might change.
     - Never ask multiple prerequisite questions about one quality. Instead ask their difference. e.g. "A's cost?\nB's cost?" → "How does A's cost differ from B's?"
     - When asking comparison questions e.g. `a vs b`, where `b` is known, only ask about the unknown.
@@ -118,20 +120,20 @@ note: Steps operate like a recursive function. "pass" means continue to the next
 8. If current_node is a question:
     1. if any nodes are pending, return.
     2. If any nodes are not visited, return.
-    3. If current_node is a root question and all root questions have decisions or user-deferred: Break out of recursion. Follow `Clarify Stop Steps`.
+    3. If current_node is a root question and all root questions have decisions or user-deferred: Break out of recursion. Follow `Stop Steps`.
     4. How many `.` children in current_node?
         - `0`: return.
         - `1`: If children have 0 decisions and current_node is deontic, instrumental, or issue, then mark child as decision `*` (exception to user-decides responsibility for convenience).
         - `>=2`: If children contain mutually exclusive answers and 0 decisions:
             - Ask the user to decide $current_node's children. Use `Decision Format`. Wait for user response. Reevaluate tree logic with new decisions. If conflicts exist, append them to $conflicts, run `Node Steps(current_node)`, then return.
 
-## Clarify Stop Steps
+## Stop Steps
 1. Show `Tree Format`.
 2. Message "Tree Complete.". Confirm that the user thinks you have reached a shared understanding that will help them with their original intent. If no, return to `Node Steps(choose_a_node_to_start_with)`.
 3. Stop clarifying. Cease all Clarify steps, roles, responsibilities, and formatting.
 4. Suggest clearing context to save tokens.
 
-## Clarify Question Taxonomy
+## Question Taxonomy
 
 | Type | Asks about | Examples |
 | ------ | ----------- | --------- |
