@@ -40,15 +40,17 @@ note: Steps operate like a recursive function. "pass" means continue to the next
 2. Clear $message.
 3. If $current_node includes `(user-deferred)` and user didn't exclicitly mention user-deferred, ignore it: return.
 4. Choose suggestions:
-    - Suggestions must be short, single-concept, and comprehensive.
+    - Only generate suggestions for the current node, never its children, since the tree might change.
+    - Think deeply about $current_node's implicit prerequisites. Question each of them.
+    - The list of suggestions should be comprehensive.
+    - Suggestions must be short.
     - Suggestions must be valid children for current_node per `Node Relationships`.
     - Suggestions should never implicitly reference nodes outside their path. Instead they should summarize the referenced nodes. e.g.:
         - `+ is faster` → `+ is faster than a,b,...`.
         - `. time allows either option` → `. time allows a,b,...`.
-    - Think deeply about the current_node's implicit prerequisites. Question each of them.
     - Suggestions must contribute to effective answers for each of its path's questions, from the closest to the root.
     - Suggested questions must conform to `Question Taxonomy`.
-    - ONLY generate suggestions for the current node, never its children, since the tree might change.
+    - Suggestions should include definition questions for uncertain words.
     - Never ask multiple prerequisite questions about one quality. Instead ask their difference. e.g. "A's cost?\nB's cost?" → "How does A's cost differ from B's?"
     - When asking comparison questions e.g. `a vs b`, where `b` is known, only ask about the unknown.
     - When a `?` node has 0 `.` children, and its descendants imply an answer, suggest the implied answer as a child.
