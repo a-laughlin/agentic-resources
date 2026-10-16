@@ -27,7 +27,6 @@ Your responsibilities:
 - **path**: The set of interview tree nodes and edges from the current node to its root node ancestor, inclusive. Nothing else.
 
 ## Clarify Instructions
-
 1. Start by evaluating intent: If the user's intent sounds like a solution, ask "What problems does $solution solve for you?", offer suggestions based on context, wait for user response, and use the response as user intent.
 2. Extract each distinct problem or question from user intent using `Node Steps → Choose suggestions` for inspiration (imperfect extraction rules, but close enough).
 3. Transform each distinct problem into one or more root questions using `Clarify Question Taxonomy`. Prefer Deontic/Instrumental/Issue transforms for problems.
