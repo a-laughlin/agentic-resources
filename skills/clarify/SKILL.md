@@ -40,40 +40,41 @@ note: Steps operate like a recursive function. "pass" means continue to the next
 2. Clear $message.
 3. If $current_node includes `(user-deferred)` and user didn't exclicitly mention user-deferred, ignore it: return.
 4. Choose suggestions:
-    - Only generate suggestions for the current node, never its children, since the tree might change.
-    - Think deeply about $current_node's implicit prerequisites. Question each of them.
-    - The list of suggestions should be comprehensive.
-    - Suggestions must be short.
-    - Suggestions must be valid children for current_node per `Node Relationships`.
-    - Suggestions should never implicitly reference nodes outside their path. Instead they should summarize the referenced nodes. e.g.:
-        - `+ is faster` → `+ is faster than a,b,...`.
-        - `. time allows either option` → `. time allows a,b,...`.
-    - Suggestions must contribute to effective answers for each of its path's questions, from the closest to the root.
-    - Suggested questions must conform to `Question Taxonomy`.
-    - Suggestions should include definition questions for uncertain words.
-    - Never ask multiple prerequisite questions about one quality. Instead ask their difference. e.g. "A's cost?\nB's cost?" → "How does A's cost differ from B's?"
-    - When asking comparison questions e.g. `a vs b`, where `b` is known, only ask about the unknown.
-    - When a `?` node has 0 `.` children, and its descendants imply an answer, suggest the implied answer as a child.
-    - Never use combinators e.g. "+" or conjunctions e.g. "and|then" in suggestions. Instead suggest them separately: e.g. `. x and y` → `. x` and `. y`.
-    - When a suggestion requires at least one _fact_ (filesystem, tools, data, etc.), format it as `$required_fact(s) (agent-deferred)`.
-    - Omit criteria questions.
-    - Broaden boolean questions. e.g. "should I do y?" → "what should I do about x?\n  . y".
-    - If suggestion is a question or answer:
+    - Suggestion Lists (all node types):
+        - Only generate suggestions for the current node, never its children, since the tree might change.
+        - Think deeply about $current_node's implicit prerequisites. Question each of them.
+        - The list of suggestions should be comprehensive.
+        - must only include valid children for current_node per `Node Relationships`.
+        - should include definition Questions for words that make $current_node ambiguous
+        - excludes criteria Questions.
+        - Broaden boolean Questions. e.g. "should I do y?" → "what should I do about x?\n  . y".
+        - never ask multiple prerequisite Questions about one quality. Instead ask their difference. e.g. "A's cost?\nB's cost?" → "How does A's cost differ from B's [C's, D's]?"
+    - Each Suggestion (all node types):
+        - must be short
+        - must never implicitly reference nodes outside its path. Instead it should summarize the referenced nodes. e.g.:
+            - `+ is faster` → `+ is faster than a,b,...`.
+            - `. time allows either option` → `. time allows a,b,...`.
+        - Never uses combinators e.g. "+" or conjunctions e.g. "and|then" in suggestions. Instead suggest them separately: e.g. `. x and y` → `. x` and `. y`.
+        - If suggestion is a Question:
+            - must conform to `Question Taxonomy`.
+            - When asking a comparison Question e.g. `a vs b`, where `b` is known, only ask about the unknown.
+            - When a suggestion requires at least one _fact_ (filesystem, tools, data, etc.), format it as `$required_fact(s) (agent-deferred)`.
+    - If current_node is a Question:
+        - and has 0 Answers, and its descendants imply Answers, then suggest them as children Answers.
+        - If current_node is a root Question and the user's original intent included a solution: suggestions must solve the problem via different mechanisms, not degrees, to break anchoring. The user's solution is one mechanism among many.
+        - Answers must be diverse in mechanism, not degree.
+        - Answers must be rigorously reasoned (e.g. based on data, practitioner experience, or first-principles).
+        - If Answers share the same prequisite: suggest a Question about the prerequisite instead of asking it separately on children.
+        - If Answers are mutually exclusive: suggest Questions that contrast the mutually exclusive Answers.
+        - If Answers are problems: never suggest the lack of a solution. Solution absence is not a problem. The problem is the unmet need the solution satisfies.
+        - If Answers include verbs: also include a null case to reduce unnecessary action (e.g., "What should I do? ... nothing")
+    - If current_node is an Answer:
+        - it should be an effective answer for its parent Question in the context of path
+        - If (is mutually exclusive to any of its sibling Answers) and (its parent Question is not "Assumptions?"), then suggest pros and cons.
+    - If current_node is a Pro/Con:
+        - If the parent answer contains an assumption that compares Answers (e.g., `a > b`), never restate the _exact same_ comparison as a pro/con. (e.g. `. a\n  + > b`).
+    - If current_node is a Question or Answer:
         - never use noun-modifying adjectives e.g. "big $noun" or verb-modifying adverbs e.g. "quickly $verb". Instead make them separate nodes: e.g. "How to do x quickly?" → "How to do x?\n  . quickly".
-    - If current_node is a question:
-        <question-children-rules>
-        - answers must be diverse in mechanism, not degree.
-        - prefer answers that are rigorously reasoned (e.g. based on data, practitioner experience, or first-principles).
-        - If any answers are mutually exclusive: suggest questions that contrast the mutually exclusive answers.
-        - If multiple answers share the same prequisite: suggest a question about it.
-        - If answers are problems: never suggest the lack of a solution. Solution absence is not a problem. The problem is the unmet need the solution satisfies.
-        - If answers include verbs: also include a null case to reduce unnecessary action (e.g., "What should I do? ... nothing")
-        </question-children-rules>
-    - If current_node is an answer or decision:
-        - If current_node is mutually exclusive to any of its sibling answers and parent question is not "Assumptions?": suggest pros and cons.
-        - When an assumption compares answers (e.g., `a > b`), never restate the _exact same_ comparison as pros/cons on those answers (e.g. `. a\n  + > b`).
-    - If current_node is a root question:
-        - If the user's intent included a solution: suggestions must solve the problem via different mechanisms, not degrees, to break anchoring. The user's solution is one mechanism among many.
     - If current_node includes `(pending)`:
         - Remove `(pending)` from current_node and rewrite any `$required_fact(s) (agent-deferred)` using subagents' success responses. When subagent failed, rewrite as `$required_fact(s) (agent-failed)`.
 5. $conflicts exist?
@@ -95,22 +96,22 @@ note: Steps operate like a recursive function. "pass" means continue to the next
         - is `=`: similar options.
         - is `+`: more specific options.
         - is `-`: more general options.
-        - is `=?`: similar questions.
-        - is `+?`: more specific questions.
-        - is `-?`: more general questions.
+        - is `=?`: similar Questions.
+        - is `+?`: more specific Questions.
+        - is `-?`: more general Questions.
     - added any children that distract from solving the root problem: add a $message gently reflecting the distraction back to the user and asking if they want to omit it.
-    - skipped any suggestions (pros/cons or prequisite questions) and current_node is not "Assumptions?":
+    - skipped any suggestions (pros/cons or prequisite Questions) and current_node is not "Assumptions?":
         1. if the path's closest `.|?` lacks an "Assumptions?" child, add one.
-        2. set the assumptions question as unvisited
-        3. for each skipped question, choose an answer to the question and add it to assumptions.
+        2. set the Assumptions Question as unvisited
+        3. for each skipped Question, choose an answer to the Question and add it to assumptions.
         4. for each skipped pro/con, add it to assumptions as "$pro_or_con won't change decision"
         5. run `Node Steps(assumptions)`.
         6. reevaluate the tree. Run `Node Steps(current_node)`. Return.
-    - for assumptions:
+    - is for assumptions:
         - if 0 assumptions kept: Add message "0 Assumptions chosen. Assumptions node removed." Return.
-    - for conflicts:
+    - is for conflicts:
         - contains plain `#`s: use the #s to resolve the conflict, run `Node Steps($current_node)`, then return.
-    - for suggestions:
+    - is for suggestions:
         - is `defer`: append `(user-deferred)` to the node's text, then return.
         - is `.`: keep all suggestions.
         - is `0`: keep no children. If $current_node is `?`, ask user if they want to delete $current_node or provide answers.
@@ -118,11 +119,11 @@ note: Steps operate like a recursive function. "pass" means continue to the next
         - contains `d#`s: mark d#s as decisions and check their logical compatibility. If incompatibilities, add them to $conflicts, run `Node Steps(current_node)`, and return.
         - contains plain `#s`: keep those suggestions.
         - $current_node is `?`: require the user to keep or enter at least 1 child, then continue waiting.
-7. For each unvisited, non-deferred child (starting with questions): run `Node Steps(child)`.
-8. If current_node is a question:
+7. For each unvisited, non-deferred child (starting with Questions): run `Node Steps(child)`.
+8. If current_node is a Question:
     1. if any nodes are pending, return.
     2. If any nodes are not visited, return.
-    3. If current_node is a root question and all root questions have decisions or user-deferred: Break out of recursion. Follow `Stop Steps`.
+    3. If current_node is a root Question and all root Questions have decisions or user-deferred: Break out of recursion. Follow `Stop Steps`.
     4. How many `.` children in current_node?
         - `0`: return.
         - `1`: If children have 0 decisions and current_node is deontic, instrumental, or issue, then mark child as decision `*` (exception to user-decides responsibility for convenience).
@@ -149,7 +150,7 @@ note: Steps operate like a recursive function. "pass" means continue to the next
 | Context | History/background | What led us to x?, How did we learn about x? |
 | Stakeholder | People/groups involved or affected | Who decides?, Who implements?, Who's consulted?, Who's informed? |
 
-## Clarify Node Relationships
+## Node Relationships
 
 | Symbol | Node     | Valid Children |
 |--------|----------|--------------------|
@@ -159,17 +160,17 @@ note: Steps operate like a recursive function. "pass" means continue to the next
 | `+`    | Pro      | `?` |
 | `-`    | Con      | `?` |
 
-## Clarify Rules
+## Instruction Rules
 - If Claude, never use the `AskUserQuestion` tool because it breaks this skill.
 - On $message, never editorialize. Be short and salient.
 - Reevaluating the tree may change the tree structure, breaking any existing recursion. Recursion restarts at the first unvisited node with the shortest path.
 
-## Clarify Tree Edit Rules
+## Tree Edit Rules
 - When editing tree nodes, only change the precise nodes the user indicates. If uncertain which nodes to edit, ask. Preserve unchanged nodes and wording exactly. Never reorganize or reword unchanged nodes.
 - When marking a decision, change symbol `.` to `*`.
 - When deleting a node that has descendents, confirm with the user that they want to delete the node and its descendents.
 
-## Clarify Tree Example
+## Tree Example
 ```txt
 What should we eat?
     * sushi
@@ -187,8 +188,11 @@ What should we eat?
         - too salty
 ```
 
-## Clarify Response Formats
-### Clarify Path Format
+## Response
+
+### Response Rules
+- When displaying formats in markdown context, always wrap them in `txt` blocks.
+### Path Format
 Show ONLY path, path's closest level of answers, those answers' selected pros/cons (in a single line), the current_node's immediate children (on separate lines), and footer. Hide non-path questions. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
 ```txt
 $path
@@ -197,7 +201,7 @@ $path
 $footer
 ```
 
-### Clarify Decision Format
+### Decision Format
 Show ONLY the path to current node, the children to decide, and info relevant to that decision. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
 ```txt
 Decide: $path
@@ -207,14 +211,14 @@ Decide: $path
 $footer
 ```
 
-### Clarify Tree Format
+### Tree Format
 Show the full and current interview tree. If suggestions/decision_choices exist, preserve their numbers. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
 ```txt
 $tree
 $footer
 ```
 
-### Clarify Conflict Format
+### Conflict Format
 Show the full and current interview tree for context, explain the conflict, ask a resolution_question, and suggest resolutions. The resolution_question is about reshaping the tree or its answers, not part of the tree itself, so never append it to the tree.
 ```txt
 $tree
@@ -224,7 +228,7 @@ $conflict_explanation. $resolution_question
 $footer
 ```
 
-### Clarify Footer Format
+### Footer Format
 ```txt
 ---
 
