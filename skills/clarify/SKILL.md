@@ -95,32 +95,33 @@ note: Steps operate like a recursive function. "pass" means continue to the next
                       4. Add a one-time message: `Pending "$current_node" until subagents find facts.`.
                       5. return.
                       - When all of current_node's subagents finish: run`Node Steps(current_node)` (async behavior expected). Return.
-6. Wait for user response. If response:
-    - matches any of the following keys exactly, then append them to existing suggestions (preserve numbers), then continue waiting:
+6. Wait for user user input:
+    - If user input matches any of the following keys exactly, then append them to existing suggestions (preserve numbers), then continue waiting:
         - is `=`: similar options.
         - is `+`: more specific options.
         - is `-`: more general options.
         - is `=?`: similar Questions.
         - is `+?`: more specific Questions.
         - is `-?`: more general Questions.
-    - added any children that distract from solving the root problem: add a $message gently reflecting the distraction back to the user and asking if they want to omit it.
-    - skipped any suggestions (pros/cons or prequisite Questions) and current_node is not "Assumptions?":
+    - If user input added any children that distract from solving the root problem: add a $message gently reflecting the distraction back to the user and asking if they want to omit it.
+    - If user input skipped any suggestions (pros/cons or prequisite Questions) and current_node is not "Assumptions?":
         1. if the path's closest `.|?` lacks an "Assumptions?" child, add one.
         2. set the Assumptions Question as unvisited
         3. for each skipped Question, choose an answer to the Question and add it to assumptions.
-        4. for each skipped pro/con, add it to assumptions as "$pro_or_con won't change decision"
+        4. for each skipped pro/con, add it to assumptions as `$pro_or_con won't change decision`
         5. run `Node Steps(assumptions)`.
         6. reevaluate the tree's logic. Run `Node Steps(current_node)`. Return.
-    - is for assumptions:
+    - If user input is for assumptions:
         - if 0 assumptions kept: Add message "0 Assumptions chosen. Assumptions node removed." Return.
-    - is for conflicts:
+    - If user input is for conflicts:
         - contains plain `#`s: use the #s to resolve the conflict, run `Node Steps($current_node)`, then return.
-    - is for suggestions:
+    - If user input is for suggestions:
         - is `defer`: append `(user-deferred)` to the node's text, then return.
         - is `.`: keep all suggestions.
         - is `0`: keep no children. If $current_node is `?`, ask user if they want to delete $current_node or provide answers.
         - is `tree`: show `Tree Format`, but include suggestions like `Path Format`.
         - contains `d#`s: mark d#s as decisions and check their logical compatibility. If incompatibilities, add them to $conflicts, run `Node Steps(current_node)`, and return.
+        - contains `e#`s: for each e#, show its pros/cons if applicable. Below the suggestion and each of its visible pros/cons, add an explanation for them.
         - contains plain `#s`: keep those suggestions.
         - $current_node is `?`: require the user to keep or enter at least 1 child, then continue waiting.
 7. For each unvisited, non-deferred child (starting with Questions): run `Node Steps(child)`.
@@ -132,7 +133,7 @@ note: Steps operate like a recursive function. "pass" means continue to the next
         - `0`: return.
         - `1`: If children have 0 decisions and current_node is deontic, instrumental, or issue, then mark child as decision `*` (exception to user-decides responsibility for convenience).
         - `>=2`: If children contain mutually exclusive answers and 0 decisions:
-            - Ask the user to decide $current_node's children. Use `Decision Format`. Wait for user response. Reevaluate tree logic with new decisions. If conflicts exist, append them to $conflicts, run `Node Steps(current_node)`, then return.
+            - Ask the user to decide $current_node's children. Use `Decision Format`. Wait for user input. Reevaluate tree logic with new decisions. If conflicts exist, append them to $conflicts, run `Node Steps(current_node)`, then return.
 
 ## Stop Steps
 1. Show `Tree Format`.
@@ -192,18 +193,29 @@ What should we eat?
         - too salty
 ```
 
+
 ## Response
 
 ### Response Rules
 - When displaying formats in markdown context, always wrap them in `txt` blocks.
-- Always group children in this order `* | . | + | - | ?`
+- Always sort children in this order `* | . | + | - | ?`
 - `assumptions` come from `Assumptions?` nodes on path ancestors.
 
+### Suggestion Format
+```txt
+$n $symbol $suggestion\n
+<if-explanation-requested>
+$suggestion_explanation
+<if-suggestion-is-Answer>
+{{foreach Pro/Con: `$pro_or_con\n$pro_or_con_explanation\n`}}
+</if-suggestion-is-Answer>
+</if-explanation-requested>
+```
 ### Path Format
 Show ONLY path, path's closest level of answers, those answers' selected pros/cons (in a single line), the current_node's immediate children (on separate lines), and footer. Hide non-path questions.
 ```txt
 $path
-    {{foreach $suggestions: `$n $symbol $suggestion\n`}}
+    {{foreach $suggestions: `Suggestion Format`}}
     {{foreach assumption relevant to current_node:`assumed: $assumption`}}
 $footer
 ```
@@ -231,7 +243,7 @@ Show the full and current interview tree for context, explain the conflict, ask 
 $tree
 
 $conflict_explanation. $resolution_question
-    {{foreach $resolution_suggestions: `$n $resolution_suggestion\n`}}
+    {{foreach $resolution_suggestions: `Suggestion Format`}}
 $footer
 ```
 
@@ -240,9 +252,9 @@ $footer
 ---
 
 {{if $message:$message\n\n}}
-{{if format is conflict:`Type "123 11": choose solutions "1,2,3 11", "-|-?": general, "+|+?": specific, "=|=?": more, or ____. Conflict resolutions are not added to tree.`}}
-{{elif format is decision:`Type "123 11": decide "1,2,3,11", "defer", "tree", or ____.`}}
-{{elif current_node is `?`:Type ".": keep all, "123 11": keep "1,2,3,11", "-|-?": general, "+|+?": specific, "=|=?": more, "defer", "tree", or ____.}}
-{{else: `Type ".": keep all, "0":keep none, "123 11": keep "1,2,3,11", "-|-?": general, "+|+?": specific, "=|=?": more, "defer", "tree", or ____.`}}
+{{if format is conflict:`Type "123 11": choose solutions "1,2,3 11", "e12": explain "1,2"\n     "=[?]": more, "-[?]": more general, "+[?]": more specific, or ____. Conflict resolutions are not added to tree.`}}
+{{elif format is decision:`Type "123 11": decide "1,2,3,11", "e12": explain "1,2", "defer", "tree", or ____.`}}
+{{elif current_node is `?`:Type "123 11": keep "1,2,3,11", "d12": decide "1,2", "e12": explain "1,2", ".": all\n     "=[?]": more, "-[?]": more general, "+[?]": more specific, "defer", "tree", or ____.}}
+{{else: `Type "123 11": keep "1,2,3,11", ".": all, "0": none\n     "=[?]": more, "-[?]": more general, "+[?]": more specific, "defer", "tree", or ____.`}}
 ```
 </elucidating>
