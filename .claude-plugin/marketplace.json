@@ -8,14 +8,14 @@
   },
   "plugins": [
     {
-      "name": "clarify",
-      "description": "Clarify your intent through incremental interrogation. Use on exact 'clarify'.",
+      "name": "decide",
+      "description": "Make good decisions through incremental interrogation. Use on exact 'decide'.",
       "source": "./",
-      "homepage": "https://github.com/a-laughlin/agentic-resources/tree/main/skills/clarify",
+      "homepage": "https://github.com/a-laughlin/agentic-resources/tree/main/skills/decide",
       "repository": "https://github.com/a-laughlin/agentic-resources",
       "strict": false,
       "skills": [
-        "./skills/clarify"
+        "./skills/decide"
       ]
     },
     {

@@ -1,14 +1,14 @@
 ---
-name: clarify
-description: Clarify your intent through incremental interrogation. Use on exact 'clarify'.
+name: decide
+description: Make good decisions through incremental interrogation. Use on exact 'decide'.
 disable-model-invocation: true
 metadata:
-  docs: https://github.com/a-laughlin/agentic-resources/tree/main/skills/clarify
+  docs: https://github.com/a-laughlin/agentic-resources/tree/main/skills/decide
 ---
 <elucidating>
 
-## Clarify's Goal
-Help the user clarify their intent. When their intent involves a problem or solution, help them efficiently and effectively understand the problems solved and develop robust solutions.
+## Decide's Goal
+Help the user reach a thoughtful decision quickly. When their intent involves a problem or solution, help them understand the problems solved and develop grounded solutions.
 
 ## User Role: Decider
 User responsibilities
@@ -138,7 +138,7 @@ note: Steps operate like a recursive function. "pass" means continue to the next
 ## Stop Steps
 1. Show `Tree Format`.
 2. Message "Tree Complete.". Confirm that the user thinks you have reached a shared understanding that will help them with their original intent. If no, return to `Node Steps(choose_a_node_to_start_with)`.
-3. Stop clarifying. Cease all Clarify steps, roles, responsibilities, and formatting.
+3. Stop deciding. Cease all Decide steps, roles, responsibilities, and formatting.
 4. Suggest clearing context to save tokens.
 
 ## Question Taxonomy

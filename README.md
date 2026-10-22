@@ -4,7 +4,7 @@ Agent skills by Adam Laughlin. Browse them below.
 
 | Skill | Description |
 | :--- | :--- |
-| [clarify](skills/clarify/README.md) | Clarify your intent through incremental interrogation. Use on exact 'clarify'. |
+| [decide](skills/decide/README.md) | Make fast, thorough, concise decisions through incremental interrogation. Use on exact 'decide'. |
 | [professional-communication](skills/professional-communication/README.md) | Provides feedback to learn to write professional communication. |
 
 ## Installation
