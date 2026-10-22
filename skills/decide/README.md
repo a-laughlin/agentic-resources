@@ -3,9 +3,9 @@
 **Decisions: Fast. Thorough. Concise.**
 
 ## 💡 Why Decide Exists
-While using Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous cognitive load and other [challenges](#challenges) that slowed me down when reaching a decision. The Decide skill approaches the challenges [differently](#️-differences-from-grill-me), with additional [benefits](#benefits).
+While using Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous cognitive load and other [challenges](#challenges-of-grill-me) that slowed me down when reaching a decision. The Decide skill resolves the challenges, resulting in 2-4x faster decision speed at similar thoroughness, 2-4x faster decision reading comprehension, and improved usability in group decision contexts.
 
-The result is 2-4x faster decision speed at similar thoroughness, in a format that's quick to share and read.
+For more details, see [challenges](#challenges-of-grill-me), [benefits](#benefits), and [differences](#️-differences-from-grill-me)
 
 ## Examples
 
@@ -20,18 +20,18 @@ What should I do about dinner?
     * cook at home
         + no travel with kids
         - cleanup
+        - prep time
         Assumptions?
             . you have ingredients for a meal on hand
             . you would cook
             . control over ingredients won't change decision
             . leftovers for later meals won't change decision
-            . prep time won't change decision
     . eat out
         + no cleanup
+        + no prep time
         - travel with kids
         Assumptions?
             . you have a kid-friendly restaurant in mind
-            . no prep won't change decision
     Who are you eating with?
         . family with kids
             How many people are eating?
@@ -60,7 +60,7 @@ Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.curso
 
 In your favorite AI chat, `/decide <problems, solutions, questions, ideas, anything...>`
 
-Each response includes shortcuts for fast exploration. For example:
+Each response includes shortcuts for performance on common tasks. For example, `/decide dinner`:
 ```txt
 What should I do for dinner?
     1 . cook at home
@@ -72,20 +72,42 @@ Type "123 11": keep "1,2,3,11", "d12": decide "1,2", "e12": explain "1,2", ".": 
      "=[?]": more, "-[?]": more general, "+[?]": more specific, "defer", "tree", or ____.
 ```
 
-- `12` keeps options #1 and #2 to review pros/cons for before deciding, and assumes an answer for question #3
-- `d12` decides options 1,2 (marks them as decisions), and assumes an answer for question #3
-- `e12` explains options 1,2 and their pros/cons, to understand unfamiliar options before keeping/deciding
-- `.` keeps all options and assumes an answer for question #3
-- `0` keeps no option and assumes an answer for question #3
-- `=` adds similar options (`=?` adds similar Questions)
-- `+` adds more specific options (`+?` adds similar Questions)
-- `-` adds more general options (`-?` adds similar Questions)
-- `defer` postpones the question to revisit when you choose
-- `tree` shows the full tree so far
-- `___` type something else
+### Task - Add Suggestions
+- `=` more suggestions
+- `=?` more suggested questions
 
-## Challenges
-I encountered a few challenges using the original:
+### Task - Improve Suggestions
+- `+` more specific options
+- `+?` more specific questions
+- `-` more general options
+- `-?` more general questions
+- Or just type how suggestions should differ (e.g., more concrete, exclude complicated)
+
+### Task - Defer a Question for Later without Interrupting Flow
+- `defer` postpones the question to revisit when you choose (adds `(user-deferred)`)
+
+### Task - Show Context
+- `tree` shows the full tree so far
+
+### Task - Select from Suggestions
+- `.` selects all options
+- `12` selects options #1 and #2 to explore their pros/cons before deciding. Also documents an assumption for skipped question #3
+- `12 and doordash` selects options #1 and #2 and a "doordash" option. Also documents an assumption for skipped question #3.
+
+### Task - Explain Unfamiliar Options before Deciding
+- `e12` explains options 1,2 and their pros/cons, to understand unfamiliar options before keeping/deciding
+
+### Task - Decide Options
+- `d12` decides options 1,2 (marks them as decisions), and documents an assumption for skipped question #3
+
+### Task - Show Broader Context
+- `tree` shows the full decision tree so far, in case the currently shown context is insufficient
+
+### Task - Everything Else
+- `___` free-form type to change options, presentation, or the existing tree.
+
+## Challenges (of grill-me)
+I encountered a few challenges using the original grill-me skill:
 - **Scannability:** Paragraphs of free-form text and inline suggestions are slow to scan vs lists.
 - **Consistency:** The default skill sometimes outputs lists to choose from, sometimes not. The inconsistent formatting creats unpredictability that slows down entry and comprehension speed.
 - **Traceability:** Untyped options and assumptions go unrecorded, leaving no trace for decision records and specs.
@@ -96,10 +118,12 @@ I encountered a few challenges using the original:
 
 ## Benefits
 In addition to solving the above challenges, Decide adds a few benefits:
-- Quickly explore ideas and make decisions with minimal typing.
-- Use in meetings to maintain shared context and focus [1](#footnotes).
-- Defer questions and stop/restart grilling when convenient.
-- Store concise decision traces in specs, ADRs, and other decision records.
+- Maximizes decision and exploration speed (2-4x grill-me's speed in my own tests)
+- Maximizes decision reading comprehension (2-4x grill-me's speed in my own tests)
+- Maximizes group usefulness [1](#footnotes)
+- Maximizes decision trace sharability
+- Minimizes typing
+- Eases multi-session decisions and question deferral.
 
 
 ## Tradeoffs
