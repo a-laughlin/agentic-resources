@@ -74,7 +74,7 @@ Type "123 11": keep "1,2,3,11", "d12": decide "1,2", "e12": explain "1,2", ".": 
 
 - `12` keeps options #1 and #2 to review pros/cons for before deciding, and assumes an answer for question #3
 - `d12` decides options 1,2 (marks them as decisions), and assumes an answer for question #3
-- `e12` explains options 1,2, including their pros/cons, to understand unfamiliar options before keeping
+- `e12` explains options 1,2 and their pros/cons, to understand unfamiliar options before keeping/deciding
 - `.` keeps all options and assumes an answer for question #3
 - `0` keeps no option and assumes an answer for question #3
 - `=` adds similar options (`=?` adds similar Questions)
