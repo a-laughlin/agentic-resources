@@ -60,9 +60,29 @@ Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.curso
 
 In your favorite AI chat, `/clarify <problems, solutions, questions, ideas, anything...>`
 
-## TBD
+Each response includes shortcuts for fast exploration. For example:
+```txt
+What should I do for dinner?
+    1 . cook at home
+    2 . eat at a restaurant
+    3 ? Who is eating?
+---
 
-This is a very early version so much is in progress. It just hit the point where tweaks started making its behavior less consistent across models and sessions, so evals are the next step before further tweaks.
+Type "123 11": keep "1,2,3,11", "d12": decide "1,2", "e12": explain "1,2", ".": all
+     "=[?]": more, "-[?]": more general, "+[?]": more specific, "defer", "tree", or ____.
+```
+
+- `12` keeps options #1 and #2 to review pros/cons for before deciding, and assumes an answer for question #3
+- `d12` decides options 1,2 (marks them as decisions), and assumes an answer for question #3
+- `e12` explains options 1,2, including their pros/cons, to understand unfamiliar options before keeping
+- `.` keeps all options and assumes an answer for question #3
+- `0` keeps no option and assumes an answer for question #3
+- `=` adds similar options (`=?` adds similar Questions)
+- `+` adds more specific options (`+?` adds similar Questions)
+- `-` adds more general options (`-?` adds similar Questions)
+- `defer` postpones the question to revisit when you choose
+- `tree` shows the full tree so far
+- `___` type something else
 
 ## Challenges
 I encountered a few challenges using the original:
