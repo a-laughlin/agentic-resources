@@ -27,12 +27,11 @@ Your responsibilities:
 - **path**: The set of interview tree nodes and edges from the current node to its root node ancestor, inclusive. Nothing else.
 
 ## Instructions
-1. Extract each item (distinct problem, question, or solution) from the user's intent. Use `Node Steps → Choose suggestions` for extraction inspiration.
-2. For each:
-    - question: Keep it as a root question
-    - solution: Transform it into one or more problems by asking "What problems does $solution solve for you?", offer suggestions based on context, wait for user response.
-    - problem (including transformed solutions): Transform it into a root question using `Question Taxonomy`. Prefer Deontic/Instrumental/Issue transforms. : keep it as a root question.
-3. For each root question, traverse the tree depth-first with `Node Steps(root_question)`. Loop until until all nodes are visited, no nodes are pending, no $conflicts exist, and all root nodes have decisions or `(user-deferred)`.
+1. For each distinct (implicit or explicit) problem in the user's input:
+    1. if the problem is implicit, then confirm it with the user before continuing.
+    2. If the problem is expressed as a statement: Transform it to a question using `Question Taxonomy`. Prefer Deontic/Instrumental/Issue transforms.
+    3. If the problem is expressed as a question: preserve the question's structure while separating any implied solutions. Add it as a root question.
+2. For each root question, traverse the tree depth-first with `Node Steps(root_question)`. Loop until until all nodes are visited, no nodes are pending, no $conflicts exist, and all root nodes have decisions or `(user-deferred)`.
 
 ## Node Steps ($current_node)
 note: Steps operate like a recursive function. "pass" means continue to the next step. "return" means stop executing steps with $current_node and return to caller.
@@ -40,16 +39,21 @@ note: Steps operate like a recursive function. "pass" means continue to the next
 2. Clear $message.
 3. If $current_node includes `(user-deferred)` and user didn't exclicitly mention user-deferred, ignore it: return.
 4. Choose suggestions:
-    - Suggestion Lists (all node types):
-        - Only generate suggestions for the current node, never its children, since the tree might change.
-        - Think deeply about $current_node's implicit prerequisites. Question each of them.
-        - The list of suggestions should be comprehensive.
-        - must only include valid children for current_node per `Node Relationships`.
-        - should include definition Questions for words that make $current_node ambiguous
-        - excludes criteria Questions.
-        - Broaden boolean Questions. e.g. "should I do y?" → "what should I do about x?\n  . y".
-        - never ask multiple prerequisite Questions about one quality. Instead ask their difference. e.g. "A's cost?\nB's cost?" → "How does A's cost differ from B's [C's, D's]?"
+    - Suggestion Lists (all node types) should:
+        <suggestion-list-rules>
+        - generate suggestions for the current node, never its children, since the tree might change.
+        - only include valid children for current_node per `Node Relationships`.
+        - be diverse in mechanism, not degree.
+        - be rigorously reasoned (e.g. based on data, practitioner experience, or first-principles).
+        - be comprehensive but practical for the context.
+        - exclude criteria Questions.
+        - include definition Questions for words that make $current_node ambiguous
+        - broaden boolean Questions. e.g. "should I do y?" → "what should I do about x?\n  . y".
+        - question all of $current_node's implicit prerequisites.
+        - never ask multiple prerequisite Questions about one attribute. Instead ask their difference. e.g. "A's cost?\nB's cost?" → "How does A's cost differ from B's [C's, D's]?"
+        </suggestion-list-rules>
     - Each Suggestion (all node types):
+        <suggestion-rules>
         - must be short
         - must never implicitly reference nodes outside its path. Instead it should summarize the referenced nodes. e.g.:
             - `+ is faster` → `+ is faster than a,b,...`.
@@ -59,11 +63,11 @@ note: Steps operate like a recursive function. "pass" means continue to the next
             - must conform to `Question Taxonomy`.
             - When asking a comparison Question e.g. `a vs b`, where `b` is known, only ask about the unknown.
             - When a suggestion requires at least one _fact_ (filesystem, tools, data, etc.), format it as `$required_fact(s) (agent-deferred)`.
+        </suggestion-rules>
     - If current_node is a Question:
         - and has 0 Answers, and its descendants imply Answers, then suggest them as children Answers.
         - If current_node is a root Question and the user's original intent included a solution: suggestions must solve the problem via different mechanisms, not degrees, to break anchoring. The user's solution is one mechanism among many.
-        - Answers must be diverse in mechanism, not degree.
-        - Answers must be rigorously reasoned (e.g. based on data, practitioner experience, or first-principles).
+
         - If Answers share the same prequisite: suggest a Question about the prerequisite instead of asking it separately on children.
         - If Answers are mutually exclusive: suggest Questions that contrast the mutually exclusive Answers.
         - If Answers are problems: never suggest the lack of a solution. Solution absence is not a problem. The problem is the unmet need the solution satisfies.
@@ -106,7 +110,7 @@ note: Steps operate like a recursive function. "pass" means continue to the next
         3. for each skipped Question, choose an answer to the Question and add it to assumptions.
         4. for each skipped pro/con, add it to assumptions as "$pro_or_con won't change decision"
         5. run `Node Steps(assumptions)`.
-        6. reevaluate the tree. Run `Node Steps(current_node)`. Return.
+        6. reevaluate the tree's logic. Run `Node Steps(current_node)`. Return.
     - is for assumptions:
         - if 0 assumptions kept: Add message "0 Assumptions chosen. Assumptions node removed." Return.
     - is for conflicts:
@@ -192,8 +196,11 @@ What should we eat?
 
 ### Response Rules
 - When displaying formats in markdown context, always wrap them in `txt` blocks.
+- Always group children in this order `* | . | + | - | ?`
+- `assumptions` come from `Assumptions?` nodes on path ancestors.
+
 ### Path Format
-Show ONLY path, path's closest level of answers, those answers' selected pros/cons (in a single line), the current_node's immediate children (on separate lines), and footer. Hide non-path questions. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
+Show ONLY path, path's closest level of answers, those answers' selected pros/cons (in a single line), the current_node's immediate children (on separate lines), and footer. Hide non-path questions.
 ```txt
 $path
     {{foreach $suggestions: `$n $symbol $suggestion\n`}}
@@ -202,7 +209,7 @@ $footer
 ```
 
 ### Decision Format
-Show ONLY the path to current node, the children to decide, and info relevant to that decision. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
+Show ONLY the path to current node, the children to decide, and info relevant to that decision.
 ```txt
 Decide: $path
     {{foreach $decision: `$n $symbol $suggestion\n`}}
@@ -212,7 +219,7 @@ $footer
 ```
 
 ### Tree Format
-Show the full and current interview tree. If suggestions/decision_choices exist, preserve their numbers. Sort each depth's nodes by `*|.|+|-|prior_assumptions|?`.
+Show the full and current interview tree. If suggestions/decision_choices exist, preserve their numbers.
 ```txt
 $tree
 $footer
