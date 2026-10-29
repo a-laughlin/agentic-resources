@@ -68,7 +68,15 @@ Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.curso
 
 Once the Decide skill is installed, in your AI chat type: `/decide x`, where `x` can be problems, solutions, questions, ideas, anything.
 
-In the `/decide dinner` example above:
+### Task - Framing the Decisions
+Decide classifies your input as problems, solutions, or context.
+- Questions keep their structure: `/decide What should I do next?` → `What should I do next?`
+- Problems are rephrased as root questions: `/decide next` → `What should I do next?`
+- Solutions are interactively traced to needs they meet, then kept as an option: `/decide order pizza` → <inquiries> → `What should I do about my hunger? 1. order pizza 2. others...`
+- Context is recorded under a `Context?` question: `/decide next action, I'm hungry` → `What should I do next? <suggestions> Context? . I'm hungry`
+
+### Task - Select from Suggestions
+Given:
 ```txt
 What should I do for dinner?
     1 . cook at home
@@ -80,55 +88,46 @@ Type "123 11": keep "1,2,3,11", "d12": decide "1,2", "e12": explain "1,2", ".": 
      "=[?]": more, "-[?]": more general, "+[?]": more specific, "defer", "tree", or ____.
 ```
 
-### Task - Framing the Decisions
-Decide classifies your input as problems, solutions, or context, then frames each problem as a root question.
-- Questions keep their structure: `/decide What should I do next?` → `What should I do next?`
-- Problems are rephrased as root questions: `/decide next` → `What should I do next?`
-- Solutions are interactively traced to needs they meet, then kept as an option: `/decide order pizza` → <inquiries> → `What should I do about my hunger? 1. order pizza 2. others...`
-- Context is recorded under a `Context?` question: `/decide next action, I'm hungry` → `What should I do next? <suggestions> Context? . I'm hungry`
+`.` selects all suggestions.\
+`12` selects suggestions #1 and #2 to explore their pros/cons before deciding. Also documents an assumption for skipped question #3.\
+`12 and doordash` selects suggestions #1 and #2 and adds a "doordash" answer. Also documents an assumption for skipped question #3.
 
-### Task - Defer a Question for Later without Interrupting Flow
-- `defer` postpones the question to revisit when you choose (adds `(user-deferred)`)
-
-### Task - Show Broader Context
-- `tree` shows the full decision tree so far, in case the currently shown context is insufficient
-
-### Task - Select from Suggestions
-- `.` selects all options
-- `12` selects options #1 and #2 to explore their pros/cons before deciding. Also documents an assumption for skipped question #3
-- `12 and doordash` selects options #1 and #2 and a "doordash" option. Also documents an assumption for skipped question #3.
-
-Selected questions are answered sequentially, then unselected suggestions are refreshed. When no questions are selected, answers to remaining questions get added to "Assumptions".
+Selected questions are answered sequentially, then unselected suggestions are refreshed. When no questions are selected, guessed answers to remaining questions get added to "Assumptions".
 
 ### Task - Explain Unfamiliar Suggestions before Deciding
-- `e12` explains suggestions 1,2 and their pros/cons, to understand unfamiliar options before keeping/deciding
-
-### Task - Add Suggestions
-- `=` more suggestions
-- `=?` more suggested questions
-
-### Task - Improve Suggestions
-- `+` more specific options
-- `+?` more specific questions
-- `-` more general options
-- `-?` more general questions
-- Or just type how suggestions should differ (e.g., more concrete, exclude complicated)
-
+`e12` explains suggestions 1,2 and their pros/cons, to understand unfamiliar suggestions before keeping/deciding
 
 ### Task - Decide Suggestions
-- `d12` decides suggestions 1,2 (marks them as decisions), and documents an assumption for skipped question #3
+`d12` decides suggestions 1,2 (marks them as decisions), and documents an assumption for skipped question #3
+
+### Task - Add Suggestions
+`=` more suggestions\
+`=?` more question suggestions
+
+### Task - Improve Suggestions
+`+` more specific suggestions\
+`+?` more specific questions\
+`-` more general suggestions\
+`-?` more general questions\
+Or just type how suggestions should differ (e.g., more concrete, exclude complicated)
+
+### Task - Defer a Question for Later without Interrupting Flow
+`defer` postpones the question to revisit when you choose (adds `(user-deferred)`)
+
+### Task - Show Broader Context
+`tree` shows the full decision tree so far, in case the currently shown context is insufficient
 
 ### Task - Everything Else
-- `___` free-form type to change options, presentation, or the existing tree.
+`___` free-form type to change suggestions, presentation, or the existing tree.
 
 ## Challenges (of grill-me)
 I encountered a few challenges using the original grill-me skill:
 - **Scannability:** Paragraphs of free-form text and inline suggestions are slow to scan vs lists.
 - **Consistency:** The default skill sometimes outputs lists to choose from, sometimes not. The inconsistent formatting creats unpredictability that slows down entry and comprehension speed.
-- **Traceability:** Untyped options and assumptions go unrecorded, leaving no trace for decision records and specs.
+- **Traceability:** Untyped suggestions and assumptions go unrecorded, leaving no trace for decision records and specs.
 - **Shareability:** The linear Q# format and spacing are too verbose and indirect for practical usage in decision records and specs.
-- **Understandability:** Questions paragraphs mix options, pros, cons, and sub-questions inconsistently, slowing reasoning about the tree. The linear+batch format obscures tree relationships. Question batches overflow the visible window and require scrolling. "Q#" indexes + batching require remembering numbers and mixing them with typed concepts. The default skill inconsistently outputs lists, sometimes not. All of these slow comprehension through [extraneous cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory).
-- **Anchoring bias:** A single recommendation anchors on that option, and missing null options anchor on "fixing what ain't broke".
+- **Understandability:** Questions paragraphs mix suggestions, pros, cons, and sub-questions inconsistently, slowing reasoning about the tree. The linear+batch format obscures tree relationships. Question batches overflow the visible window and require scrolling. "Q#" indexes + batching require remembering numbers and mixing them with typed concepts. The default skill inconsistently outputs lists, sometimes not. All of these slow comprehension through [extraneous cognitive load](https://thedecisionlab.com/reference-guide/psychology/cognitive-load-theory).
+- **Anchoring bias:** A single recommendation anchors on that option, and missing null suggestions anchor on "fixing what ain't broke".
 - **Usability:** Answering by Q number takes lookups, scrolling, and typing. Good alternative suggestions show up inconsistently.
 
 ## Benefits
