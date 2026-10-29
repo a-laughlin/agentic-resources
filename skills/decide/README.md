@@ -64,8 +64,6 @@ curl: `curl -fsSL --create-dirs https://www.a-laughlin.com/agentic-resources/age
 --\
 Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.cursor/skills`, `~/.agents/skills`, …).
 
-## Usage Example
-
 ## Common Decision Tasks
 
 Once the Decide skill is installed, in your AI chat type: `/decide x`, where `x` can be problems, solutions, questions, ideas, anything.
