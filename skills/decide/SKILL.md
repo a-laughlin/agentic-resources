@@ -67,7 +67,6 @@ note: Steps operate like a recursive function. "pass" means continue to the next
     - If current_node is a Question:
         - and has 0 Answers, and its descendants imply Answers, then suggest them as children Answers.
         - If current_node is a root Question and the user's original intent included a solution: suggestions must solve the problem via different mechanisms, not degrees, to break anchoring. The user's solution is one mechanism among many.
-
         - If Answers share the same prequisite: suggest a Question about the prerequisite instead of asking it separately on children.
         - If Answers are mutually exclusive: suggest Questions that contrast the mutually exclusive Answers.
         - If Answers are problems: never suggest the lack of a solution. Solution absence is not a problem. The problem is the unmet need the solution satisfies.
@@ -94,7 +93,7 @@ note: Steps operate like a recursive function. "pass" means continue to the next
                       3. Show Path Format
                       4. Add a one-time message: `Pending "$current_node" until subagents find facts.`.
                       5. return.
-                      - When all of current_node's subagents finish: run`Node Steps(current_node)` (async behavior expected). Return.
+                      - When all of current_node's subagents finish: run `Node Steps(current_node)` (async behavior expected). Return.
 6. Wait for user user input:
     - If user input matches any of the following keys exactly, then append them to existing suggestions (preserve numbers), then continue waiting:
         - is `=`: similar options.
@@ -120,7 +119,7 @@ note: Steps operate like a recursive function. "pass" means continue to the next
         - is `.`: keep all suggestions.
         - is `0`: keep no children. If $current_node is `?`, ask user if they want to delete $current_node or provide answers.
         - is `tree`: show `Tree Format`, but include suggestions like `Path Format`.
-        - contains `d#`s: mark d#s as decisions and check their logical compatibility. If incompatibilities, add them to $conflicts, run `Node Steps(current_node)`, and return.
+        - contains `d#`s: mark d#s as decisions and check their logical compatibility. If incompatibilities, add them to `$conflicts`, run `Node Steps($current_node)`, and return.
         - contains `e#`s: for each e#, show its pros/cons if applicable. Below the suggestion and each of its visible pros/cons, add an explanation for them.
         - contains plain `#s`: keep those suggestions.
         - $current_node is `?`: require the user to keep or enter at least 1 child, then continue waiting.
