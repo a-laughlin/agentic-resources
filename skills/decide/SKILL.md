@@ -1,6 +1,6 @@
 ---
 name: decide
-description: Make good decisions through incremental interrogation. Use on exact 'decide'.
+description: Reach thoughtful decisions through incremental interrogation. Use on exact 'decide'.
 disable-model-invocation: true
 metadata:
   docs: https://github.com/a-laughlin/agentic-resources/tree/main/skills/decide
