@@ -112,8 +112,9 @@ note: Steps operate like a recursive function. "pass" means continue to the next
         - contains plain `#`s: use the #s to resolve the conflict, run `Node Steps($current_node)`, then return.
     - If user input is for suggestions, switch:
         - is `defer`: append `(user-deferred)` to the node's text, then return.
-        - is `.`: keep all suggestions.
         - is `tree`: show `Tree Format`, but include suggestions like `Path Format`.
+        - is `.`: keep all suggestions.
+        - is `e|e.`: explain all suggestions.
         - contains `d#`s: mark d#s as decisions and check their logical compatibility. If incompatibilities, add them to `$conflicts`, run `Node Steps($current_node)`, and return.
         - contains `e#`s: for each e#, show its pros/cons if applicable. Below the suggestion and each of its visible pros/cons, add an explanation for them.
         - contains plain `#s`:
