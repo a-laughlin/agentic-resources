@@ -3,9 +3,9 @@
 **Decisions: Fast. Thorough. Concise.**
 
 ## 💡 Why Decide Exists
-While using Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous cognitive load and other [challenges](#challenges-of-grill-me) that slowed me down when reaching a decision. The Decide skill resolves the challenges, resulting in 2-4x faster decision speed at similar thoroughness, 2-4x faster decision reading comprehension, and improved usability in group decision contexts.
+The Decide skill facilitates fast decisions through iterative questions and suggested answers. [Compared to skills like grill-me](#challenges-of-grill-me): 2-4x faster decision speed at similar thoroughness, 2-4x faster decision reading comprehension, and improved group usability\*.
 
-For more details, see [challenges](#challenges-of-grill-me), [benefits](#benefits), and [differences](#️-differences-from-grill-me)
+\* Based on my own tests and experience. Compare it yourself ([installation](#installation)).
 
 ## Examples
 
@@ -121,7 +121,7 @@ Or just type how suggestions should differ (e.g., more concrete, exclude complic
 `___` free-form type to change suggestions, presentation, or the existing tree.
 
 ## Challenges (of grill-me)
-I encountered a few challenges using the original grill-me skill:
+While using Matt Pocock's [grill-me skill](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md), I began to notice extraneous cognitive load and other challenges that slowed me down:
 - **Scannability:** Paragraphs of free-form text and inline suggestions are slow to scan vs lists.
 - **Consistency:** The default skill sometimes outputs lists to choose from, sometimes not. The inconsistent formatting creats unpredictability that slows down entry and comprehension speed.
 - **Traceability:** Untyped suggestions and assumptions go unrecorded, leaving no trace for decision records and specs.
