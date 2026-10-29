@@ -64,11 +64,13 @@ curl: `curl -fsSL --create-dirs https://www.a-laughlin.com/agentic-resources/age
 --\
 Swap `-a claude-code | ~/.claude/skills` for your agent (e.g.`cursor`, `~/.cursor/skills`, `~/.agents/skills`, …).
 
-## Usage
+## Usage Example
 
-In your favorite AI chat, `/decide <problems, solutions, questions, ideas, anything...>`
+## Common Decision Tasks
 
-Each response includes shortcuts for performance on common tasks. For example, `/decide dinner`:
+Once the Decide skill is installed, in your AI chat type: `/decide x`, where `x` can be problems, solutions, questions, ideas, anything.
+
+In the `/decide dinner` example above:
 ```txt
 What should I do for dinner?
     1 . cook at home
@@ -87,6 +89,17 @@ Decide classifies your input as problems, solutions, or context, then frames eac
 - Problems are rephrased as root questions: `/decide next` → `What should I do next?`
 - Context is recorded under a `Context?` question: `/decide next, I'm hungry` → `What should I do about dinner? <suggestions> Context? . I'm hungry`
 
+### Task - Defer a Question for Later without Interrupting Flow
+- `defer` postpones the question to revisit when you choose (adds `(user-deferred)`)
+
+### Task - Show Broader Context
+- `tree` shows the full decision tree so far, in case the currently shown context is insufficient
+
+### Task - Select from Suggestions
+- `.` selects all options
+- `12` selects options #1 and #2 to explore their pros/cons before deciding. Also documents an assumption for skipped question #3
+- `12 and doordash` selects options #1 and #2 and a "doordash" option. Also documents an assumption for skipped question #3.
+
 ### Task - Add Suggestions
 - `=` more suggestions
 - `=?` more suggested questions
@@ -98,25 +111,11 @@ Decide classifies your input as problems, solutions, or context, then frames eac
 - `-?` more general questions
 - Or just type how suggestions should differ (e.g., more concrete, exclude complicated)
 
-### Task - Defer a Question for Later without Interrupting Flow
-- `defer` postpones the question to revisit when you choose (adds `(user-deferred)`)
+### Task - Explain Unfamiliar Suggestions before Deciding
+- `e12` explains suggestions 1,2 and their pros/cons, to understand unfamiliar options before keeping/deciding
 
-### Task - Show Context
-- `tree` shows the full tree so far
-
-### Task - Select from Suggestions
-- `.` selects all options
-- `12` selects options #1 and #2 to explore their pros/cons before deciding. Also documents an assumption for skipped question #3
-- `12 and doordash` selects options #1 and #2 and a "doordash" option. Also documents an assumption for skipped question #3.
-
-### Task - Explain Unfamiliar Options before Deciding
-- `e12` explains options 1,2 and their pros/cons, to understand unfamiliar options before keeping/deciding
-
-### Task - Decide Options
-- `d12` decides options 1,2 (marks them as decisions), and documents an assumption for skipped question #3
-
-### Task - Show Broader Context
-- `tree` shows the full decision tree so far, in case the currently shown context is insufficient
+### Task - Decide Suggestions
+- `d12` decides suggestions 1,2 (marks them as decisions), and documents an assumption for skipped question #3
 
 ### Task - Everything Else
 - `___` free-form type to change options, presentation, or the existing tree.
