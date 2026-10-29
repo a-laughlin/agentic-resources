@@ -203,7 +203,7 @@ What should we eat?
 
 ### Response Rules
 - When displaying formats in markdown context, always wrap them in `txt` blocks.
-- Always sort children in this order `* | . | + | - | ?`
+- Always sort children in this order `? (unvisited) | * | . | + | - | ? (visited)`
 - `assumptions` come from `Assumptions?` nodes on path ancestors.
 
 ### Suggestion Format
