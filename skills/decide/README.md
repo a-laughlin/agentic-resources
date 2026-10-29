@@ -82,10 +82,10 @@ Type "123 11": keep "1,2,3,11", "d12": decide "1,2", "e12": explain "1,2", ".": 
 
 ### Task - Framing the Decisions
 Decide classifies your input as problems, solutions, or context, then frames each problem as a root question.
-- Solutions are traced back to the needs they meet, then kept as one option among many: `/decide order pizza` → `What should I do about dinner? . order pizza`
 - Questions keep their structure: `/decide What should I do next?` → `What should I do next?`
 - Problems are rephrased as root questions: `/decide next` → `What should I do next?`
-- Context is recorded under a `Context?` question: `/decide next, I'm hungry` → `What should I do about dinner? <suggestions> Context? . I'm hungry`
+- Solutions are interactively traced to needs they meet, then kept as an option: `/decide order pizza` → <inquiries> → `What should I do about my hunger? 1. order pizza 2. others...`
+- Context is recorded under a `Context?` question: `/decide next action, I'm hungry` → `What should I do next? <suggestions> Context? . I'm hungry`
 
 ### Task - Defer a Question for Later without Interrupting Flow
 - `defer` postpones the question to revisit when you choose (adds `(user-deferred)`)
