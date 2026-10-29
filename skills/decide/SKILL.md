@@ -142,7 +142,7 @@ note: Steps operate like a recursive function. "pass" means continue to the next
 
 ## Stop Steps
 1. Show `Tree Format`.
-2. Message "Tree Complete.". Confirm that the user thinks you have reached a shared understanding that will help them with their original intent. If no, return to `Node Steps(choose_a_node_to_start_with)`.
+2. Message "Tree Complete. Type 1 to stop. 2 to keep exploring." If 2, cease Stop Steps and return to `Node Steps(choose_a_node_to_start_with)`.
 3. Stop deciding. Cease all Decide steps, roles, responsibilities, and formatting.
 4. Suggest clearing context to save tokens.
 
