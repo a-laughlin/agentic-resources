@@ -106,25 +106,30 @@ note: Steps operate like a recursive function. "pass" means continue to the next
         - is `+?`: more specific Questions.
         - is `-?`: more general Questions.
     - If user input added any children that distract from solving the root problem: add a $message gently reflecting the distraction back to the user and asking if they want to omit it.
-    - If user input skipped any suggestions (pros/cons or prequisite Questions) and current_node is not "Assumptions?":
-        1. if the path's closest `.|?` lacks an "Assumptions?" child, add one.
-        2. set the Assumptions Question as unvisited
-        3. for each skipped Question, choose an answer to the Question and add it to assumptions.
-        4. for each skipped pro/con, add it to assumptions as `$pro_or_con won't change decision`
-        5. run `Node Steps(assumptions)`.
-        6. reevaluate the tree's logic. Run `Node Steps(current_node)`. Return.
     - If user input is for assumptions:
         - if 0 assumptions kept: Add message "0 Assumptions chosen. Assumptions node removed." Return.
     - If user input is for conflicts:
         - contains plain `#`s: use the #s to resolve the conflict, run `Node Steps($current_node)`, then return.
-    - If user input is for suggestions:
+    - If user input is for suggestions, switch:
         - is `defer`: append `(user-deferred)` to the node's text, then return.
         - is `.`: keep all suggestions.
         - is `0`: keep no children. If $current_node is `?`, ask user if they want to delete $current_node or provide answers.
         - is `tree`: show `Tree Format`, but include suggestions like `Path Format`.
         - contains `d#`s: mark d#s as decisions and check their logical compatibility. If incompatibilities, add them to `$conflicts`, run `Node Steps($current_node)`, and return.
         - contains `e#`s: for each e#, show its pros/cons if applicable. Below the suggestion and each of its visible pros/cons, add an explanation for them.
-        - contains plain `#s`: keep those suggestions.
+        - contains plain `#s`:
+            1. Keep all non-question selections.
+            2. if questions are selected:
+                1. if exactly 1 question selected: `Node Steps(question)`, then recompute its unselected siblings, then restart `Node Steps(current_node)`.
+                2. if 2+ questions selected: foreach selected question, until all selected questions are answered or user-deferred: `Node Steps(question)`,
+                3. Recompute unselected siblings then restart `Node Steps(current_node)`. Return.
+            3. else if no questions selected, and user input skipped any Pros/Cons or prequisite Questions, and `$current_node` is not "Assumptions?":
+                1. if the path's closest `.|?` lacks an "Assumptions?" child, add one.
+                2. set the Assumptions Question as unvisited.
+                3. for each skipped Question, guess a likely answer to the Question and add it to assumptions.
+                4. for each skipped Pro/Con, add it to assumptions as `$pro_or_con won't change decision`.
+                5. run `Node Steps(assumptions)`.
+                6. reevaluate the tree's logic. Run `Node Steps($current_node)`. Return.
         - $current_node is `?`: require the user to keep or enter at least 1 child, then continue waiting.
 7. For each unvisited, non-deferred child (starting with Questions): run `Node Steps(child)`.
 8. If current_node is a Question:
