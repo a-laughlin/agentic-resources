@@ -48,7 +48,15 @@ What should I do about dinner?
 <img src="./decide-example.gif"/>
 
 ## Installation
-npx skills: `npx skills add https://www.a-laughlin.com/agentic-resources --skill decide -a claude-code -g`\
+
+### Installing in ChatGPT
+<https://help.openai.com/en/articles/20001066-skills-in-chatgpt>
+
+### Installing in Claude
+<https://support.claude.com/en/articles/12512180-use-skills-in-claude>
+
+### Installing from Terminal
+npx: `npx skills add https://www.a-laughlin.com/agentic-resources --skill decide -a claude-code -g`\
 pnpm: `pnpm dlx skills add https://www.a-laughlin.com/agentic-resources --skill decide -a claude-code -g`\
 Claude plugin: `claude plugin marketplace add a-laughlin/agentic-resources` then `claude plugin install decide@agentic-resources`\
 gh: `gh skill install a-laughlin/agentic-resources decide`\
