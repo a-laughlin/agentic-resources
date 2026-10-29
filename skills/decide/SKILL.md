@@ -113,7 +113,6 @@ note: Steps operate like a recursive function. "pass" means continue to the next
     - If user input is for suggestions, switch:
         - is `defer`: append `(user-deferred)` to the node's text, then return.
         - is `.`: keep all suggestions.
-        - is `0`: keep no children. If $current_node is `?`, ask user if they want to delete $current_node or provide answers.
         - is `tree`: show `Tree Format`, but include suggestions like `Path Format`.
         - contains `d#`s: mark d#s as decisions and check their logical compatibility. If incompatibilities, add them to `$conflicts`, run `Node Steps($current_node)`, and return.
         - contains `e#`s: for each e#, show its pros/cons if applicable. Below the suggestion and each of its visible pros/cons, add an explanation for them.
@@ -130,7 +129,6 @@ note: Steps operate like a recursive function. "pass" means continue to the next
                 4. for each skipped Pro/Con, add it to assumptions as `$pro_or_con won't change decision`.
                 5. run `Node Steps(assumptions)`.
                 6. reevaluate the tree's logic. Run `Node Steps($current_node)`. Return.
-        - $current_node is `?`: require the user to keep or enter at least 1 child, then continue waiting.
 7. For each unvisited, non-deferred child (starting with Questions): run `Node Steps(child)`.
 8. If current_node is a Question:
     1. if any nodes are pending, return.
