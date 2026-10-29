@@ -98,6 +98,11 @@ Decide classifies your input as problems, solutions, or context, then frames eac
 - `12` selects options #1 and #2 to explore their pros/cons before deciding. Also documents an assumption for skipped question #3
 - `12 and doordash` selects options #1 and #2 and a "doordash" option. Also documents an assumption for skipped question #3.
 
+Selected questions are answered sequentially, then unselected suggestions are refreshed. When no questions are selected, answers to remaining questions get added to "Assumptions".
+
+### Task - Explain Unfamiliar Suggestions before Deciding
+- `e12` explains suggestions 1,2 and their pros/cons, to understand unfamiliar options before keeping/deciding
+
 ### Task - Add Suggestions
 - `=` more suggestions
 - `=?` more suggested questions
@@ -109,8 +114,6 @@ Decide classifies your input as problems, solutions, or context, then frames eac
 - `-?` more general questions
 - Or just type how suggestions should differ (e.g., more concrete, exclude complicated)
 
-### Task - Explain Unfamiliar Suggestions before Deciding
-- `e12` explains suggestions 1,2 and their pros/cons, to understand unfamiliar options before keeping/deciding
 
 ### Task - Decide Suggestions
 - `d12` decides suggestions 1,2 (marks them as decisions), and documents an assumption for skipped question #3
