@@ -32,7 +32,7 @@ What should I do about dinner?
         - travel with kids
         Assumptions?
             . you have a kid-friendly restaurant in mind
-    Who are you eating with?
+    Who is eating?
         . family with kids
             How many people are eating?
                 . 4
@@ -95,7 +95,7 @@ Type "123 11": keep "1,2,3,11", "d12": decide "1,2", "e12": explain "1,2", ".": 
 Selected questions are answered sequentially, then unselected suggestions are refreshed. When no questions are selected, guessed answers to remaining questions get added to "Assumptions".
 
 ### Task - Explain Unfamiliar Suggestions before Deciding
-`e12` explains suggestions 1,2 and their pros/cons, to understand unfamiliar suggestions before keeping/deciding
+`e12` explains suggestions 1,2 and their pros/cons
 
 ### Task - Decide Suggestions
 `d12` decides suggestions 1,2 (marks them as decisions), and documents an assumption for skipped question #3
